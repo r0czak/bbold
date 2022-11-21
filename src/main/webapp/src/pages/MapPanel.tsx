@@ -4,7 +4,7 @@ import React from 'react';
 const MapPanel = () => {
   return (
     <View>
-      <Text>MapScreen</Text>
+      <Text>MapScreen SIALALA LELUM POLELUM</Text>
     </View>
   );
 };
