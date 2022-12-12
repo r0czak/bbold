@@ -8,4 +8,6 @@
     <include file="2022-10-10-initial_authentication.xml" relativeToChangelogFile="true"/>
     <include file="2022-10-13-refresh-token.xml" relativeToChangelogFile="true"/>
     <include file="2022-11-20-update-refresh-token.xml" relativeToChangelogFile="true"/>
+    <include file="db/changelog/2022-12-12-user_details.xml"/>
+    <include file="db/changelog/2022-12-12-.xml"/>
 </databaseChangeLog>
