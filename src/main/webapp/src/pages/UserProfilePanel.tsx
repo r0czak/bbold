@@ -1,12 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const AppNavStack = () => {
+const UserProfilePanel = () => {
   return (
     <View>
-      <Text>AppNavStack</Text>
+      <Text>UserProfilePanel</Text>
     </View>
   );
 };
 
-export default AppNavStack;
+export default UserProfilePanel;
