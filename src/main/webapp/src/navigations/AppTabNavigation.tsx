@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Button, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -13,7 +13,7 @@ import ResearchPanel from '../pages/ResearchPanel';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavStack = () => {
+const AppTabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -27,6 +27,9 @@ const TabNavStack = () => {
         },
         headerTitleStyle: {
           color: '#fff',
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
         },
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
@@ -52,30 +55,65 @@ const TabNavStack = () => {
       <Tab.Screen
         name="HomePage"
         component={HomePanel}
-        options={{title: 'Strona główna'}}
+        options={{
+          title: 'Strona główna',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Tab.Screen
         name="BloodPage"
         component={BloodCardPanel}
-        options={{title: 'Krew'}}
+        options={{
+          title: 'Krew',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Tab.Screen
         name="MapPage"
         component={MapPanel}
-        options={{title: 'Mapa'}}
+        options={{
+          title: 'Mapa',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Tab.Screen
         name="DiscountsPage"
         component={DiscountPanel}
-        options={{title: 'Zniżki'}}
+        options={{
+          title: 'Zniżki',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Tab.Screen
         name="ResearchPage"
         component={ResearchPanel}
-        options={{title: 'Badania'}}
+        options={{
+          title: 'Badania',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            </TouchableOpacity>
+          ),
+        }}
       />
     </Tab.Navigator>
   );
 };
 
-export default TabNavStack;
+export default AppTabNavigation;

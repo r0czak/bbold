@@ -8,7 +8,7 @@ import HomePanel from '../pages/HomePanel';
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavStack = () => {
+const AppStackNavigation = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="WelcomePage" component={WelcomePanel} />
@@ -19,4 +19,4 @@ const AuthNavStack = () => {
   );
 };
 
-export default AuthNavStack;
+export default AppStackNavigation;
