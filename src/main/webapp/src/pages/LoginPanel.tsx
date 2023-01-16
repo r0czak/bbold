@@ -14,9 +14,9 @@ import {
 import CustomInputField from '../components/CustomInputField';
 import CustomButton from '../components/CustomButton';
 
-// import {AuthContext} from '../context/AuthContext';
-// import {AxiosContext} from '../context/AxiosContext';
-// import * as Keychain from 'react-native-keychain';
+import {AuthContext} from '../context/AuthContext';
+import {AxiosContext} from '../context/AxiosContext';
+import * as Keychain from 'react-native-keychain';
 
 const LoginPanel = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -29,14 +29,16 @@ const LoginPanel = ({navigation}) => {
     password: '',
   });
 
-  const check_password_regex = password => {
-    return (
-      /[A-Z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /[aeiou]/.test(password) &&
-      /[A-Za-z0-9]{6}$/.test(password)
-    );
-  };
+  const {login, logout} = useContext(AuthContext);
+
+  // const check_password_regex = password => {
+  //   return (
+  //     /[A-Z]/.test(password) &&
+  //     /[0-9]/.test(password) &&
+  //     /[aeiou]/.test(password) &&
+  //     /[A-Za-z0-9]{6}$/.test(password)
+  //   );
+  // };
 
   const validate = () => {
     Keyboard.dismiss();
@@ -90,23 +92,23 @@ const LoginPanel = ({navigation}) => {
 
   const {height} = useWindowDimensions();
 
-  const showAlert = () =>
-    Alert.alert(
-      'Błąd logowania!',
-      'Niepoprawna nazwa użytkownika bądź hasło.',
-      [
-        {
-          text: 'Ok',
-        },
-      ],
-      {
-        cancelable: true,
-        onDismiss: () =>
-          Alert.alert(
-            'This alert was dismissed by tapping outside of the alert dialog.',
-          ),
-      },
-    );
+  // const showAlert = () =>
+  //   Alert.alert(
+  //     'Błąd logowania!',
+  //     'Niepoprawna nazwa użytkownika bądź hasło.',
+  //     [
+  //       {
+  //         text: 'Ok',
+  //       },
+  //     ],
+  //     {
+  //       cancelable: true,
+  //       onDismiss: () =>
+  //         Alert.alert(
+  //           'This alert was dismissed by tapping outside of the alert dialog.',
+  //         ),
+  //     },
+  //   );
 
   const onLoginPressed = () => {
     //showAlert();
@@ -133,6 +135,7 @@ const LoginPanel = ({navigation}) => {
       /> */}
       <View>
         <CustomInputField
+          //onChangeText={text => setEmail(text)}
           onChangeText={text => handleOnchange(text, 'username')}
           //onFocus={() => handleError(null, 'username')}
           label="Username"
@@ -142,6 +145,7 @@ const LoginPanel = ({navigation}) => {
           password={undefined}
         />
         <CustomInputField
+          //onChangeText={text => setPassword(text)}
           onChangeText={text => handleOnchange(text, 'password')}
           //onFocus={() => handleError(null, 'password')}
           label="Password"
@@ -176,8 +180,10 @@ const LoginPanel = ({navigation}) => {
 
       <CustomButton
         title="Zaloguj"
-        //onPress={() => navigation.navigate('HomePage')}
-        onPress={() => onLoginPressed()}
+        //onPress={() => onLoginPressed()}
+        onPress={() => {
+          login(data.username, data.password);
+        }}
       />
 
       <View style={styles.loginLinkView}>

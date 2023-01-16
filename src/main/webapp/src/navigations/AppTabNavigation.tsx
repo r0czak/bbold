@@ -1,5 +1,5 @@
 import {View, Text, Button, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -11,9 +11,13 @@ import MapPanel from '../pages/MapPanel';
 import DiscountPanel from '../pages/DiscountPage';
 import ResearchPanel from '../pages/ResearchPanel';
 
+import {AuthContext} from '../context/AuthContext';
+
 const Tab = createBottomTabNavigator();
 
 const AppTabNavigation = () => {
+  const {logout} = useContext(AuthContext);
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -58,7 +62,10 @@ const AppTabNavigation = () => {
         options={{
           title: 'Strona główna',
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert('This is a button!')}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}>
               <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
             </TouchableOpacity>
           ),
@@ -70,7 +77,10 @@ const AppTabNavigation = () => {
         options={{
           title: 'Krew',
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert('This is a button!')}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}>
               <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
             </TouchableOpacity>
           ),
@@ -82,7 +92,10 @@ const AppTabNavigation = () => {
         options={{
           title: 'Mapa',
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert('This is a button!')}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}>
               <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
             </TouchableOpacity>
           ),
@@ -94,7 +107,10 @@ const AppTabNavigation = () => {
         options={{
           title: 'Zniżki',
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert('This is a button!')}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}>
               <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
             </TouchableOpacity>
           ),
@@ -106,7 +122,10 @@ const AppTabNavigation = () => {
         options={{
           title: 'Badania',
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert('This is a button!')}>
+            <TouchableOpacity
+              onPress={() => {
+                logout();
+              }}>
               <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
             </TouchableOpacity>
           ),
