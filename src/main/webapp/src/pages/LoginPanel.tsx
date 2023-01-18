@@ -122,20 +122,8 @@ const LoginPanel = ({navigation}) => {
         style={[styles.logo, {height: height * 0.4}]}
         resizeMode="contain"
       />
-      {/* <CustomInputField
-        placeholder="Nazwa użytkownika"
-        value={username}
-        setValue={setUsername}user
-        icon={'email'}
-      />
-      <PasswordInputField
-        placeholder="Hasło"
-        value={password}
-        setValue={setPassword}
-      /> */}
       <View>
         <CustomInputField
-          //onChangeText={text => setEmail(text)}
           onChangeText={text => handleOnchange(text, 'username')}
           //onFocus={() => handleError(null, 'username')}
           label="Username"

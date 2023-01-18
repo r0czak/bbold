@@ -6,8 +6,8 @@ const BloodCard = ({item}) => {
     <View style={[styles.card, {backgroundColor: item.cardColor}]}>
       <Text style={styles.cardTitle}>{item.donationType}</Text>
       <Text style={styles.cardValue}>{item.donationAmount}</Text>
-      <Text style={{color: '#fff'}}>Data ostatniej donacji:</Text>
-      <Text style={styles.cardData}>{item.donationDate}</Text>
+      <Text style={{color: '#fff'}}>Następna możliwa donacja:</Text>
+      <Text style={styles.cardData}>{item.donationDate} - (x dni)</Text>
     </View>
   );
 };
@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
     flex: 1,
-    margin: 10,
-    borderRadius: 15,
+    margin: 7,
+    borderRadius: 20,
+    elevation: 5,
     height: Dimensions.get('window').width / 2.3, // approximate a square
   },
   cardTitle: {

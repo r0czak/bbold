@@ -2,18 +2,22 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
   ImageBackground,
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
   Keyboard,
+  Pressable,
+  Button,
 } from 'react-native';
 import CustomInputField from '../components/CustomInputField';
 import PasswordInputField from '../components/PasswordInputField';
 import CustomButton from '../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect} from 'react';
+import DatePicker from 'react-native-date-picker';
 
 const RegistrationPanel = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -36,6 +40,8 @@ const RegistrationPanel = ({navigation}) => {
     birthdate: '',
   });
   const [loading, setLoading] = React.useState(false);
+  const [datePicker, setDatePicker] = React.useState(new Date());
+  const [open, setOpen] = React.useState(false);
 
   const validate = () => {
     Keyboard.dismiss();
@@ -94,6 +100,16 @@ const RegistrationPanel = ({navigation}) => {
     }
   };
 
+  const showDatePicker = () => {
+    return (
+      <DatePicker
+        modal
+        date={datePicker}
+        onDateChange={text => handleOnchange(text, 'firstname')}
+      />
+    );
+  };
+
   const register = () => {
     //validate();
     //setLoading(!loading);
@@ -145,16 +161,39 @@ const RegistrationPanel = ({navigation}) => {
             error={errors.surname}
             password={undefined}
           />
-          <CustomInputField
-            keyboardType="date"
-            onChangeText={text => handleOnchange(text, 'birhtdate')}
-            onFocus={() => handleError(null, 'birthdate')}
-            label="Birthdate"
-            placeholder="Data urodzenia"
-            iconName={'calendar-month'}
-            error={errors.birthdate}
-            password={undefined}
-          />
+          <TouchableOpacity onPress={() => setOpen(true)}>
+            {/* <View>
+              <TextInput
+                onFocus={() => showDatePicker()}
+                editable={false}
+                placeholder="Date Of Birth"
+              />
+            </View> */}
+            <CustomInputField
+              //keyboardType="date"
+              onChangeText={text => handleOnchange(text, 'birhtdate')}
+              //onFocus={() => handleError(null, 'birthdate')}
+              label="Birthdate"
+              placeholder="Data urodzenia"
+              iconName={'calendar-month'}
+              error={errors.birthdate}
+              password={undefined}
+            />
+
+            <DatePicker
+              modal
+              open={open}
+              date={datePicker}
+              onConfirm={datePicker => {
+                setOpen(false);
+                setDatePicker(datePicker);
+                data.birthdate = datePicker.toString();
+              }}
+              onCancel={() => {
+                setOpen(false);
+              }}
+            />
+          </TouchableOpacity>
           <CustomInputField
             keyboardType="numeric"
             onChangeText={text => handleOnchange(text, 'peselNumber')}

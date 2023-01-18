@@ -8,148 +8,142 @@ import {
   FlatList,
   ScrollView,
   Button,
+  SafeAreaView,
 } from 'react-native';
 
 import BloodLevelItem from '../components/BloodLevelItem';
+import NewsCard from '../components/NewsCard';
+import AccordionItem from '../components/AccordionItem';
+import {AccordionList} from 'react-native-accordion-list-view';
 
 const data = [
   {title: 'a Rh+', bloodLevel: 15},
   {title: 'b Rh+', bloodLevel: 6},
   {title: 'a Rh-', bloodLevel: 18},
   {title: 'b Rh-', bloodLevel: 50},
-  {title: 'ab Rh+', bloodLevel: 56},
+  {title: 'ab Rh+', bloodLevel: 120},
   {title: 'ab Rh-', bloodLevel: 30},
   {title: '0 Rh+', bloodLevel: 59},
   {title: '0 Rh-', bloodLevel: 9},
 ];
 
-const HomePanel = () => {
+const news = [
+  {
+    title: 'Nowy rok z krwiodawstwem',
+    bodyText: 'lelum polelum ipsum',
+    date: '28.11.22',
+    imageURL: '',
+  },
+  {
+    title: 'Zmiany rejestracji dawców',
+    bodyText: 'lelum polelum ipsum',
+    date: '31.11.22',
+    imageURL: '',
+  },
+  {
+    title: 'Oddaj krew w akcji mikołajkowej',
+    bodyText:
+      'lelum polelum ipsum wjiwejaioweowfejiowejio jioawejiofioawjejioweaf',
+    date: '12.12.12',
+    imageURL: '',
+  },
+];
+
+const faq = [
+  {
+    title: 'Jak oddawać krew?',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+  },
+  {
+    title: 'Kiedy mogę oddawać krew?',
+    description:
+      '1. ajwefiawehjf sdfawjefa sdajfiweoaj\n2.siefjawoeifjaoiw jfioawjeoif\n3.ajfiwejfapwfjawiefjasodf',
+  },
+  {
+    title: 'Gdzie oddawać krew?',
+    description: 'ajwefiawehjf sdfawjefa sdajfiweoaj',
+  },
+  {
+    title: 'Ryzyko oddawania krwi',
+    description: 'ajwefiawehjf sdfawjefa sdajfiweoaj',
+  },
+  {title: 'title5', description: 'ajwefiawehjf sdfawjefa sdajfiweoaj'},
+];
+
+const HomePanel = ({navigation}: {navigation: any}) => {
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>Witaj w aplikacji BeBold!</Text>
-      <ImageBackground
-        source={require('../../assets/images/background_style1.png')}>
-        <Text style={styles.header}>Stany krwi w punkcie.</Text>
+      <View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={styles.header}>Stany krwi w centrum</Text>
+        </View>
+        <View
+          style={{
+            borderColor: '#c43b3d',
+            borderWidth: 1,
+          }}
+        />
         <FlatList
-          // style={styles.list}
           key={4}
           data={data}
           numColumns={4}
           renderItem={BloodLevelItem}
         />
-      </ImageBackground>
-      <View style={styles.uncontainer}>
+      </View>
+      <View>
+        <View style={{alignItems: 'center', marginTop: 15}}>
+          <Text style={styles.header}>Aktualności</Text>
+        </View>
         <View
           style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderColor: '#c43b3d',
+            borderWidth: 1,
           }}
         />
-        <Text style={styles.header}>Aktualności</Text>
-        {/* <View style={styles.card}>
-          <Text> Karta info aktualnosci 123 </Text>
-        </View> */}
         <View
           style={{
-            height: 250,
-            marginTop: 10,
+            height: 260,
           }}>
           <ScrollView horizontal={true}>
-            <View
-              style={{
-                height: 250,
-                width: 250,
-                borderColor: '#c4c4c4',
-                borderWidth: 1,
-                borderRadius: 10,
-              }}>
-              <View style={{flex: 2}}>
-                <Image
-                  source={require('../../assets/images/1.png')}
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: 'cover',
-                  }}
-                />
-              </View>
-              <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                <Text style={{color: '#464646'}}>
-                  {' '}
-                  Akcja promocyjna oddawania krwi
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}>
-                  <Text style={{marginTop: 15, color: '#464646'}}>
-                    {' '}
-                    28.11.22{' '}
-                  </Text>
-                  <Text style={{marginTop: 15, color: '#464646'}}>
-                    {' '}
-                    Czytaj więcej ...{' '}
-                  </Text>
+            {news.map((itemk, key) => {
+              return (
+                <View key={key}>
+                  <NewsCard
+                    item={itemk}
+                    onPressFunctionality={() =>
+                      navigation.navigate('NewsPanel', {item: itemk})
+                    }
+                  />
                 </View>
-              </View>
-            </View>
-            <View
-              style={{
-                height: 250,
-                width: 250,
-                borderColor: '#c4c4c4',
-                borderWidth: 1,
-                borderRadius: 10,
-                marginLeft: 5,
-              }}>
-              <View style={{flex: 2}}>
-                <Image
-                  source={require('../../assets/images/2.png')}
-                  style={{
-                    flex: 1,
-                    width: null,
-                    height: null,
-                    resizeMode: 'cover',
-                  }}
-                />
-              </View>
-              <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-                <Text style={{color: '#464646'}}>
-                  {' '}
-                  Usprawnienia centrów krwiodawstwa{' '}
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}>
-                  <Text style={{marginTop: 15, color: '#464646'}}>
-                    {' '}
-                    28.11.22{' '}
-                  </Text>
-                  <Text style={{marginTop: 15, color: '#464646'}}>
-                    {' '}
-                    Czytaj więcej ...{' '}
-                  </Text>
-                </View>
-              </View>
-            </View>
+              );
+            })}
           </ScrollView>
+        </View>
+      </View>
+      <View style={{paddingBottom: 10}}>
+        <View style={{alignItems: 'center', marginTop: 15}}>
+          <Text style={styles.header}>Kompendium krwiodawcy</Text>
         </View>
         <View
           style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
+            borderColor: '#c43b3d',
+            borderWidth: 1,
           }}
         />
-        <Text style={styles.header}>FAQ</Text>
-        <View style={styles.card}>
-          <Text> Karta info aktualnosci 123 </Text>
-        </View>
-        <View style={styles.card}>
-          <Text> Karta info aktualnosci 123 </Text>
+        <View style={styles.accordionContainer}>
+          <Text style={{margin: 5}}>
+            {' '}
+            Niezbędne informacje dla krwiodawców początkujących i tych
+            wprawionych w oddawaniu krwi.{' '}
+          </Text>
+          {faq.map((item, key) => {
+            return (
+              <View key={key}>
+                <AccordionItem title={item.title} bodyText={item.description} />
+              </View>
+            );
+          })}
         </View>
       </View>
     </ScrollView>
@@ -158,23 +152,15 @@ const HomePanel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  uncontainer1: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  uncontainer: {
-    flex: 0.5,
-    backgroundColor: '#ffffff',
-    margin: 5,
+    // flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 10,
   },
   header: {
     fontWeight: 'bold',
     fontSize: 24,
     color: '#c43b3d',
-    marginBottom: 10,
+    marginTop: 5,
   },
   description: {
     fontSize: 12,
@@ -184,14 +170,11 @@ const styles = StyleSheet.create({
   startText: {
     color: '#fff',
   },
-  card: {
-    height: 150,
-    backgroundColor: '#c43b3d',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    borderRadius: 15,
+  styleAcord: {
+    backgroundColor: '#ff0000',
+    fontStyle: '#fff',
   },
+  accordionContainer: {},
 });
 
 export default HomePanel;

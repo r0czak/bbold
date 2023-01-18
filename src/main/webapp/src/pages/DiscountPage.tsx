@@ -1,22 +1,25 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 
-import DiscountCardComponent from '../components/DiscountCardComponent';
+import DiscountCard from '../components/DiscountCard';
 
 const data = [
   {
     title: 'Mikołajkowe gadzety dla krwiodawstwa',
     description: 'Zdobadz gadzety pod choinkę oddając krew w punktach w Łodzi',
+    status: true,
     uri: require('../../assets/images/gadgets.png'),
   },
   {
     title: 'Znizka na transport publiczny w okresie swiatecznym',
     description: 'Opis znizki',
+    status: false,
     uri: require('../../assets/images/transport.png'),
   },
   {
     title: 'Apteka',
     description: 'Aktywne do: 21.01.2023',
+    status: true,
     uri: require('../../assets/images/pharmacy.png'),
   },
 ];
@@ -24,18 +27,22 @@ const data = [
 const DiscountPanel = () => {
   return (
     <ScrollView style={styles.container}>
-      <DiscountCardComponent item={data[0]} />
-      <Text></Text>
-      <DiscountCardComponent item={data[1]} />
-      <Text></Text>
-      <DiscountCardComponent item={data[2]} />
+      {data.map((itemK, key) => {
+        return (
+          <View key={key}>
+            <DiscountCard item={itemK} />
+          </View>
+        );
+      })}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 5,
   },
 });
 

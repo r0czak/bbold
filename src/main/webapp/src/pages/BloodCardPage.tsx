@@ -8,70 +8,82 @@ import {
 } from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import BloodCard from '../components/BloodCard';
 
 const data = [
   {
     donationType: 'Krew pełna',
     donationAmount: '1000 ml',
     donationDate: '05.12.22',
-    cardColor: '#b92d2d',
+    cardColor: '#c43b3d',
   },
   {
     donationType: 'Osocze',
     donationAmount: '550 ml',
     donationDate: '05.12.22',
-    cardColor: '#bcbc3a',
+    cardColor: '#ff9100',
   },
   {
     donationType: 'Płytki krwi',
     donationAmount: '200 ml',
     donationDate: '05.12.22',
-    cardColor: '#3e7839',
+    cardColor: '#2fa524',
   },
   {
     donationType: 'Krwinki czerwone',
     donationAmount: '500 ml',
     donationDate: '05.12.22',
-    cardColor: '#4a86b6',
+    cardColor: '#3791da',
   },
   {
     donationType: 'Krwinki białe',
     donationAmount: '100 ml',
     donationDate: '05.12.22',
-    cardColor: '#5b2c39',
+    cardColor: '#dbdd4b',
   },
   {
-    donationType: 'Krwinki białe i czerwone',
+    donationType: 'Cos tam',
     donationAmount: '100 ml',
     donationDate: '05.12.22',
-    cardColor: '#27315e',
+    cardColor: '#ac39da',
   },
 ];
 
-import BloodCard from '../components/BloodCard';
+interface LastDonation {
+  date: string;
+  donationType: string;
+  donationAmount: string;
+}
+
+const donationData: LastDonation = {
+  date: '04.11.2022',
+  donationType: 'Krew pełna',
+  donationAmount: '500',
+};
 
 const BloodCardPanel = () => {
   return (
-    <View style={styles.background}>
-      <View style={styles.container}>
-        <Text style={styles.text1}> Twoja ostatnia donacja </Text>
-        <Text style={styles.text1}> Piątek, 04.11.2022 </Text>
+    <View style={styles.container}>
+      <View style={styles.donationCard}>
+        <Text style={{fontSize: 17, color: '#000'}}>
+          Twoja ostatnia donacja
+        </Text>
+        <Text style={{color: '#6d6d6d'}}> Data: {donationData.date} </Text>
         <View style={styles.info}>
-          <Text style={styles.text2}> Krew pełna </Text>
-          <Text style={styles.text2}> Ilość: 500 ml </Text>
-          <View
-            style={{
-              borderBottomColor: '#000000',
-              borderBottomWidth: 4,
-            }}
-          />
-          <Text style={styles.text3}>
+          <Text style={{color: '#000000', fontSize: 22}}>
+            {' '}
+            {donationData.donationType}{' '}
+          </Text>
+          <Text style={{color: '#000000', fontSize: 40, marginBottom: 5}}>
+            {donationData.donationAmount} ml
+          </Text>
+          <Text style={{color: '#000000', fontSize: 13}}>
             <MaterialCommunityIcons
-              name={'account'}
+              name={'google-maps'}
               size={20}
-              color="#000000"
+              color="#585858"
             />
-            Regionalne Centrum Krwiodawstwa i Krwiolecznictwa Łódź{' '}
+            Regionalne Centrum Krwiodactwa i Krwiolecznictwa Łódź
           </Text>
         </View>
       </View>
@@ -84,7 +96,7 @@ const BloodCardPanel = () => {
       <FlatList
         key={4}
         data={data}
-        style={styles.cards}
+        //style={styles.cards}
         renderItem={BloodCard}
         numColumns={2}
       />
@@ -93,36 +105,29 @@ const BloodCardPanel = () => {
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+  },
+  donationCard: {
     marginTop: 20,
-    backgroundColor: '#d4d4d4',
+    backgroundColor: '#ffffff',
     margin: 10,
-    padding: 10,
+    paddingTop: 10,
+    paddingHorizontal: 10,
     borderRadius: 15,
+    elevation: 7,
   },
   info: {
-    marginTop: 5,
-    backgroundColor: '#d4d4d4',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10,
     borderRadius: 15,
+    marginBottom: 10,
   },
   cards: {
     flex: 1,
   },
-  text1: {
-    color: '#202020',
-    fontSize: 17,
-  },
-  text2: {
-    color: '#202020',
-    fontSize: 24,
-  },
-  text3: {color: '#202020', fontSize: 13},
 });
 
 export default BloodCardPanel;
