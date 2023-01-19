@@ -5,9 +5,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
-    <include file="2022-10-10-initial_authentication.xml" relativeToChangelogFile="true"/>
-    <include file="2022-10-13-refresh-token.xml" relativeToChangelogFile="true"/>
-    <include file="2022-11-20-update-refresh-token.xml" relativeToChangelogFile="true"/>
-    <include file="db/changelog/2022-12-12-user_details.xml"/>
-    <include file="db/changelog/2022-12-12-.xml"/>
+    <include file="/db/changelog/2022-10-10-initial-authentication.xml"/>
+    <include file="/db/changelog/2022-10-13-refresh-token.xml"/>
+    <include file="/db/changelog/2022-11-20-update-refresh-token.xml"/>
+    <include file="/db/changelog/2022-12-12-user-details.xml"/>
+    <include file="/db/changelog/2022-12-12-add-user-id-to-user-details.xml"/>
+    <include file="/db/changelog/2023-01-18-populate-roles.xml"/>
 </databaseChangeLog>

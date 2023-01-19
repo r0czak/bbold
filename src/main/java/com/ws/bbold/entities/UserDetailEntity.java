@@ -1,5 +1,7 @@
-package com.ws.bbold.models;
+package com.ws.bbold.entities;
 
+import com.ws.bbold.entities.enums.BloodType;
+import com.ws.bbold.entities.enums.Gender;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
@@ -16,14 +18,14 @@ import java.util.Objects;
     uniqueConstraints = {
       @UniqueConstraint(columnNames = "pesel"),
     })
-public class UserDetail {
+public class UserDetailEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @OneToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private User user;
+  private UserEntity user;
 
   @NotBlank
   @Size(max = 40)
@@ -47,9 +49,9 @@ public class UserDetail {
   @Column(length = 20)
   private BloodType bloodType;
 
-  public UserDetail() {}
+  public UserDetailEntity() {}
 
-  public UserDetail(
+  public UserDetailEntity(
       String firstName,
       String lastName,
       LocalDate birthDate,
@@ -64,11 +66,11 @@ public class UserDetail {
     this.bloodType = bloodType;
   }
 
-  public User getUser() {
+  public UserEntity getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(UserEntity user) {
     this.user = user;
   }
 
@@ -124,7 +126,7 @@ public class UserDetail {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    UserDetail userDetail = (UserDetail) o;
+    UserDetailEntity userDetail = (UserDetailEntity) o;
     return id != null && Objects.equals(id, userDetail.id);
   }
 

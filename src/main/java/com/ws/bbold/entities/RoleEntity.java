@@ -1,5 +1,6 @@
-package com.ws.bbold.models;
+package com.ws.bbold.entities;
 
+import com.ws.bbold.entities.enums.ERole;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Entity
 @ToString
 @Table(name = "roles")
-public class Role {
+public class RoleEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -18,9 +19,9 @@ public class Role {
   @Column(length = 20)
   private ERole name;
 
-  public Role() {}
+  public RoleEntity() {}
 
-  public Role(ERole name) {
+  public RoleEntity(ERole name) {
     this.name = name;
   }
 
@@ -44,7 +45,7 @@ public class Role {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Role role = (Role) o;
+    RoleEntity role = (RoleEntity) o;
     return id != null && Objects.equals(id, role.id);
   }
 

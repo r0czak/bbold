@@ -1,4 +1,4 @@
-package com.ws.bbold.models;
+package com.ws.bbold.entities.enums;
 
 public enum Gender {
     MALE,

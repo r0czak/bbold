@@ -1,17 +1,17 @@
-package com.ws.bbold.models;
+package com.ws.bbold.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity(name = "refreshtoken")
-public class RefreshToken {
+public class RefreshTokenEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   @OneToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private User user;
+  private UserEntity user;
 
   @Column(nullable = false, unique = true)
   private String token;
@@ -19,7 +19,7 @@ public class RefreshToken {
   @Column(nullable = false)
   private Instant expiryDate;
 
-  public RefreshToken() {}
+  public RefreshTokenEntity() {}
 
   public long getId() {
     return id;
@@ -29,11 +29,11 @@ public class RefreshToken {
     this.id = id;
   }
 
-  public User getUser() {
+  public UserEntity getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(UserEntity user) {
     this.user = user;
   }
 
