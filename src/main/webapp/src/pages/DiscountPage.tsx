@@ -1,7 +1,8 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Button} from 'react-native';
 import React from 'react';
 
 import DiscountCard from '../components/DiscountCard';
+import DiscountModalItem from '../components/DiscountModalItem';
 
 const data = [
   {
@@ -27,6 +28,7 @@ const data = [
 const DiscountPanel = () => {
   return (
     <ScrollView style={styles.container}>
+      <View></View>
       {data.map((itemK, key) => {
         return (
           <View key={key}>

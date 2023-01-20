@@ -18,13 +18,11 @@ const App = () => {
   const [userToken, setUserToken] = React.useState<any>(null);
 
   return (
-    // <AuthProvider>
-    //   <AppNavigation />
-    // </AuthProvider>
     <AuthProvider>
       <NavigationContainer>
         <AppTabNavigation />
       </NavigationContainer>
+      {/* <AppNavigation /> */}
     </AuthProvider>
   );
 };

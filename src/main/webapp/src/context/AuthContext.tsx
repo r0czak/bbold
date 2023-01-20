@@ -5,6 +5,19 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
+const registerDATA = {
+  username: 'user',
+  email: 'user@mail.com',
+  password: 'password',
+  role: ['user'],
+  firstName: 'Bartosz',
+  lastName: 'Kaczor',
+  birthDate: '1998-07-15',
+  gender: 'MALE',
+  pesel: '98071504900',
+  bloodType: 'B_NEGATIVE',
+};
+
 const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
@@ -22,6 +35,28 @@ const AuthProvider = ({children}) => {
 
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
         AsyncStorage.setItem('userToken', userInfo.accessToken);
+      })
+      .catch(e => {
+        console.log(`Login error ${e}`);
+      });
+    // setUserToken('ioiojlkad');
+    // AsyncStorage.setItem('userToken', 'ioiojlkad');
+    setIsLoading(false);
+  };
+
+  const register = username => {
+    setIsLoading(true);
+    axios
+      .post(`http://10.0.2.2:8082/api/auth/signup`, registerDATA)
+      .then(response => {
+        console.log(response.data);
+        console.log(username);
+        // let userInfo = response.data;
+        // setUserInfo(userInfo);
+        // setUserToken(userInfo.accessToken);
+
+        // AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        // AsyncStorage.setItem('userToken', userInfo.accessToken);
       })
       .catch(e => {
         console.log(`Login error ${e}`);

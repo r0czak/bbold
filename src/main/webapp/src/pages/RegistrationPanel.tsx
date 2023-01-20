@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,8 +16,10 @@ import CustomInputField from '../components/CustomInputField';
 import PasswordInputField from '../components/PasswordInputField';
 import CustomButton from '../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useEffect} from 'react';
 import DatePicker from 'react-native-date-picker';
+
+import {AuthContext} from '../context/AuthContext';
+import {AxiosContext} from '../context/AxiosContext';
 
 const RegistrationPanel = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -233,14 +235,9 @@ const RegistrationPanel = ({navigation}) => {
             error={errors.password}
             password
           />
-          {/* <PasswordInputField
-              placeholder="Hasło"
-              value={password}
-              setValue={setPassword}
-            /> */}
         </View>
       </ImageBackground>
-      <CustomButton title="Zarejestruj konto dawcy" onPress={validate} />
+      <CustomButton title="Zarejestruj konto dawcy" onPress={register()} />
       <View style={styles.loginLinkView}>
         <Text style={styles.loginLinkText}>
           Jesteś już aktywnym krwiodawcą?
