@@ -10,6 +10,7 @@
     <include file="/db/changelog/2022-11-20-update-refresh-token.xml"/>
     <include file="/db/changelog/2022-12-12-user-details.xml"/>
     <include file="/db/changelog/2022-12-12-add-user-id-to-user-details.xml"/>
+    <include file="/db/changelog/2023-01-20-add-blood-center-file-address-blood-amounts-openning-hours.xml"/>
 
     <!-- Always at the end-->
     <include file="/db/changelog/2023-01-18-populate-roles.xml"/>

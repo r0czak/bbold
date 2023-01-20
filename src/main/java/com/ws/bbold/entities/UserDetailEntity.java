@@ -2,6 +2,9 @@ package com.ws.bbold.entities;
 
 import com.ws.bbold.entities.enums.BloodType;
 import com.ws.bbold.entities.enums.Gender;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
@@ -11,8 +14,12 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
+
+@Getter
+@Setter
+@NoArgsConstructor
 @ToString
+@Entity
 @Table(
     name = "user_details",
     uniqueConstraints = {
@@ -49,7 +56,10 @@ public class UserDetailEntity {
   @Column(length = 20)
   private BloodType bloodType;
 
-  public UserDetailEntity() {}
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "blood_donation_center_id")
+  @ToString.Exclude
+  private BloodDonationCenterEntity bloodDonationCenter;
 
   public UserDetailEntity(
       String firstName,
@@ -65,63 +75,6 @@ public class UserDetailEntity {
     this.pesel = pesel;
     this.bloodType = bloodType;
   }
-
-  public UserEntity getUser() {
-    return user;
-  }
-
-  public void setUser(UserEntity user) {
-    this.user = user;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public LocalDate getBirthDate() {
-    return birthDate;
-  }
-
-  public void setBirthDate(LocalDate birthDate) {
-    this.birthDate = birthDate;
-  }
-
-  public Gender getGender() {
-    return gender;
-  }
-
-  public void setGender(Gender gender) {
-    this.gender = gender;
-  }
-
-  public String getPesel() {
-    return pesel;
-  }
-
-  public void setPesel(String pesel) {
-    this.pesel = pesel;
-  }
-
-  public BloodType getBloodType() {
-    return bloodType;
-  }
-
-  public void setBloodType(BloodType bloodType) {
-    this.bloodType = bloodType;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

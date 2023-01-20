@@ -1,15 +1,20 @@
 package com.ws.bbold.entities;
 
 import com.ws.bbold.entities.enums.ERole;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @ToString
-@Table(name = "roles")
+@Entity(name = "roles")
 public class RoleEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,29 +23,6 @@ public class RoleEntity {
   @Enumerated(EnumType.STRING)
   @Column(length = 20)
   private ERole name;
-
-  public RoleEntity() {}
-
-  public RoleEntity(ERole name) {
-    this.name = name;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public ERole getName() {
-    return name;
-  }
-
-  public void setName(ERole name) {
-    this.name = name;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

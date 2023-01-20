@@ -23,10 +23,12 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
   @Autowired private UserRepository userRepository;
 
+  @Override
   public Optional<RefreshTokenEntity> findByToken(String token) {
     return refreshTokenRepository.findByToken(token);
   }
 
+  @Override
   public RefreshTokenEntity createRefreshToken(Long userId) {
     RefreshTokenEntity refreshToken = new RefreshTokenEntity();
 
@@ -38,6 +40,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     return refreshToken;
   }
 
+  @Override
   public RefreshTokenEntity verifyExpiration(RefreshTokenEntity token) {
     if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
       refreshTokenRepository.delete(token);

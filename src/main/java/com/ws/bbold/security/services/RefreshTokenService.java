@@ -10,6 +10,4 @@ public interface RefreshTokenService {
     RefreshTokenEntity createRefreshToken(Long userId);
 
     RefreshTokenEntity verifyExpiration(RefreshTokenEntity token);
-
-    int deleteByUserId(Long userId);
 }
