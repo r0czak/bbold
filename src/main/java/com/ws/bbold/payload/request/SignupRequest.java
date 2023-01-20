@@ -1,7 +1,7 @@
 package com.ws.bbold.payload.request;
 
-import com.ws.bbold.models.BloodType;
-import com.ws.bbold.models.Gender;
+import com.ws.bbold.entities.enums.BloodType;
+import com.ws.bbold.entities.enums.Gender;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,17 +1,17 @@
 package com.ws.bbold.repository;
 
-import java.util.Optional;
-
-import com.ws.bbold.models.RefreshToken;
-import com.ws.bbold.models.User;
+import com.ws.bbold.entities.RefreshTokenEntity;
+import com.ws.bbold.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
-  Optional<RefreshToken> findByToken(String token);
+public interface RefreshTokenRepository extends JpaRepository<RefreshTokenEntity, Long> {
+  Optional<RefreshTokenEntity> findByToken(String token);
 
   @Modifying
-  int deleteByUser(User user);
+  int deleteByUser(UserEntity user);
 }

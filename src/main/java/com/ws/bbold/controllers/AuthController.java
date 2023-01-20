@@ -1,7 +1,11 @@
 package com.ws.bbold.controllers;
 
+import com.ws.bbold.entities.RefreshTokenEntity;
+import com.ws.bbold.entities.RoleEntity;
+import com.ws.bbold.entities.UserDetailEntity;
+import com.ws.bbold.entities.UserEntity;
+import com.ws.bbold.entities.enums.ERole;
 import com.ws.bbold.exception.TokenRefreshException;
-import com.ws.bbold.models.*;
 import com.ws.bbold.payload.request.LoginRequest;
 import com.ws.bbold.payload.request.SignupRequest;
 import com.ws.bbold.payload.request.TokenRefreshRequest;
@@ -12,8 +16,8 @@ import com.ws.bbold.repository.RoleRepository;
 import com.ws.bbold.repository.UserDetailRepository;
 import com.ws.bbold.repository.UserRepository;
 import com.ws.bbold.security.jwt.JwtUtils;
-import com.ws.bbold.security.services.RefreshTokenService;
-import com.ws.bbold.security.services.UserDetailsImpl;
+import com.ws.bbold.security.services.impl.RefreshTokenServiceImpl;
+import com.ws.bbold.security.services.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,7 +49,8 @@ public class AuthController {
 
   @Autowired JwtUtils jwtUtils;
 
-  @Autowired RefreshTokenService refreshTokenService;
+  @Autowired
+  RefreshTokenServiceImpl refreshTokenService;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -66,7 +71,7 @@ public class AuthController {
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());
 
-    RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+    RefreshTokenEntity refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
     return ResponseEntity.ok(
         new JwtResponse(
@@ -96,17 +101,17 @@ public class AuthController {
     }
 
     // Create new user's account
-    User user =
-        new User(
+    UserEntity user =
+        new UserEntity(
             signUpRequest.getUsername(),
             signUpRequest.getEmail(),
             encoder.encode(signUpRequest.getPassword()));
 
     Set<String> strRoles = signUpRequest.getRole();
-    Set<Role> roles = new HashSet<>();
+    Set<RoleEntity> roles = new HashSet<>();
 
     if (strRoles == null) {
-      Role userRole =
+      RoleEntity userRole =
           roleRepository
               .findByName(ERole.ROLE_USER)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -116,7 +121,7 @@ public class AuthController {
           role -> {
             switch (role) {
               case "admin":
-                Role adminRole =
+                RoleEntity adminRole =
                     roleRepository
                         .findByName(ERole.ROLE_ADMIN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -124,7 +129,7 @@ public class AuthController {
 
                 break;
               case "mod":
-                Role modRole =
+                RoleEntity modRole =
                     roleRepository
                         .findByName(ERole.ROLE_MODERATOR)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -132,7 +137,7 @@ public class AuthController {
 
                 break;
               default:
-                Role userRole =
+                RoleEntity userRole =
                     roleRepository
                         .findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -142,8 +147,8 @@ public class AuthController {
     }
     user.setRoles(roles);
 
-    UserDetail userDetail =
-        new UserDetail(
+    UserDetailEntity userDetail =
+        new UserDetailEntity(
             signUpRequest.getFirstName(),
             signUpRequest.getLastName(),
             signUpRequest.getBirthDate(),
@@ -166,7 +171,7 @@ public class AuthController {
     return refreshTokenService
         .findByToken(requestRefreshToken)
         .map(refreshTokenService::verifyExpiration)
-        .map(RefreshToken::getUser)
+        .map(RefreshTokenEntity::getUser)
         .map(
             user -> {
               String token = jwtUtils.generateTokenFromUsername(user.getUsername());

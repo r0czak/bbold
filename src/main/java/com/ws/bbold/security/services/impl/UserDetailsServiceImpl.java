@@ -1,6 +1,6 @@
-package com.ws.bbold.security.services;
+package com.ws.bbold.security.services.impl;
 
-import com.ws.bbold.models.User;
+import com.ws.bbold.entities.UserEntity;
 import com.ws.bbold.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user =
+    UserEntity user =
         userRepository
             .findByUsername(username)
             .orElseThrow(

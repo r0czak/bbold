@@ -1,5 +1,10 @@
-package com.ws.bbold.models;
+package com.ws.bbold.entities;
 
+import com.ws.bbold.entities.enums.BloodType;
+import com.ws.bbold.entities.enums.Gender;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
@@ -9,21 +14,25 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
+
+@Getter
+@Setter
+@NoArgsConstructor
 @ToString
+@Entity
 @Table(
     name = "user_details",
     uniqueConstraints = {
       @UniqueConstraint(columnNames = "pesel"),
     })
-public class UserDetail {
+public class UserDetailEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @OneToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private User user;
+  private UserEntity user;
 
   @NotBlank
   @Size(max = 40)
@@ -47,9 +56,12 @@ public class UserDetail {
   @Column(length = 20)
   private BloodType bloodType;
 
-  public UserDetail() {}
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "blood_donation_center_id")
+  @ToString.Exclude
+  private BloodDonationCenterEntity bloodDonationCenter;
 
-  public UserDetail(
+  public UserDetailEntity(
       String firstName,
       String lastName,
       LocalDate birthDate,
@@ -63,68 +75,11 @@ public class UserDetail {
     this.pesel = pesel;
     this.bloodType = bloodType;
   }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public LocalDate getBirthDate() {
-    return birthDate;
-  }
-
-  public void setBirthDate(LocalDate birthDate) {
-    this.birthDate = birthDate;
-  }
-
-  public Gender getGender() {
-    return gender;
-  }
-
-  public void setGender(Gender gender) {
-    this.gender = gender;
-  }
-
-  public String getPesel() {
-    return pesel;
-  }
-
-  public void setPesel(String pesel) {
-    this.pesel = pesel;
-  }
-
-  public BloodType getBloodType() {
-    return bloodType;
-  }
-
-  public void setBloodType(BloodType bloodType) {
-    this.bloodType = bloodType;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    UserDetail userDetail = (UserDetail) o;
+    UserDetailEntity userDetail = (UserDetailEntity) o;
     return id != null && Objects.equals(id, userDetail.id);
   }
 

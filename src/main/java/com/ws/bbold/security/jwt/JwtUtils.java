@@ -1,6 +1,6 @@
 package com.ws.bbold.security.jwt;
 
-import com.ws.bbold.security.services.UserDetailsImpl;
+import com.ws.bbold.security.services.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
