@@ -2,7 +2,7 @@ package com.ws.bbold.security;
 
 import com.ws.bbold.security.jwt.AuthEntryPointJwt;
 import com.ws.bbold.security.jwt.AuthTokenFilter;
-import com.ws.bbold.security.services.UserDetailsServiceImpl;
+import com.ws.bbold.security.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
