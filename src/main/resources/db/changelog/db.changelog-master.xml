@@ -14,4 +14,9 @@
 
     <!-- Always at the end-->
     <include file="/db/changelog/2023-01-18-populate-roles.xml"/>
+    <include file="/db/changelog/2023-01-20-populate-adresses.xml"/>
+    <include file="/db/changelog/2023-01-21-populate-blood-amounts.xml"/>
+    <include file="/db/changelog/2023-01-21-populate-openning-hours.xml"/>
+    <include file="/db/changelog/2023-01-26-populate-blood-donation-images.xml"/>
+    <include file="/db/changelog/2023-01-26-populate-blood-donation-centers.xml"/>
 </databaseChangeLog>

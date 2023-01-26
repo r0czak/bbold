@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+<<<<<<< Updated upstream
+=======
+    <preConditions onFail="WARN">
+        <and>
+            <tableExists tableName="blood_amounts"/>
+            <rowCount expectedRows="0"
+                      tableName="blood_amounts"/>
+        </and>
+    </preConditions>
+    <changeSet id="2023-01-21-r0czak-02" author="r0czak">
+        <insert tableName="blood_amounts">
+            <column name="a_positive" valueNumeric="26"/>
+            <column name="a_negative" valueNumeric="5"/>
+            <column name="b_positive" valueNumeric="55"/>
+            <column name="b_negative" valueNumeric="27"/>
+            <column name="ab_positive" valueNumeric="90"/>
+            <column name="ab_negative" valueNumeric="93"/>
+            <column name="o_positive" valueNumeric="60"/>
+            <column name="o_negative" valueNumeric="21"/>
+        </insert>
+        <insert tableName="blood_amounts">
+            <column name="a_positive" valueNumeric="90"/>
+            <column name="a_negative" valueNumeric="20"/>
+            <column name="b_positive" valueNumeric="87"/>
+            <column name="b_negative" valueNumeric="10"/>
+            <column name="ab_positive" valueNumeric="83"/>
+            <column name="ab_negative" valueNumeric="10"/>
+            <column name="o_positive" valueNumeric="3"/>
+            <column name="o_negative" valueNumeric="5"/>
+        </insert>
+        <insert tableName="blood_amounts">
+            <column name="a_positive" valueNumeric="90"/>
+            <column name="a_negative" valueNumeric="65"/>
+            <column name="b_positive" valueNumeric="93"/>
+            <column name="b_negative" valueNumeric="30"/>
+            <column name="ab_positive" valueNumeric="80"/>
+            <column name="ab_negative" valueNumeric="10"/>
+            <column name="o_positive" valueNumeric="40"/>
+            <column name="o_negative" valueNumeric="70"/>
+        </insert>
+        <insert tableName="blood_amounts">
+            <column name="a_positive" valueNumeric="90"/>
+            <column name="a_negative" valueNumeric="60"/>
+            <column name="b_positive" valueNumeric="89"/>
+            <column name="b_negative" valueNumeric="79"/>
+            <column name="ab_positive" valueNumeric="92"/>
+            <column name="ab_negative" valueNumeric="95"/>
+            <column name="o_positive" valueNumeric="30"/>
+            <column name="o_negative" valueNumeric="10"/>
+        </insert>
+        <insert tableName="blood_amounts">
+            <column name="a_positive" valueNumeric="60"/>
+            <column name="a_negative" valueNumeric="70"/>
+            <column name="b_positive" valueNumeric="90"/>
+            <column name="b_negative" valueNumeric="65"/>
+            <column name="ab_positive" valueNumeric="87"/>
+            <column name="ab_negative" valueNumeric="20"/>
+            <column name="o_positive" valueNumeric="15"/>
+            <column name="o_negative" valueNumeric="10"/>
+        </insert>
+    </changeSet>
+
+
+>>>>>>> Stashed changes
+</databaseChangeLog>

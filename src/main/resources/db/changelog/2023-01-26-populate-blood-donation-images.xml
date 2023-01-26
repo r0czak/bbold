@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+<<<<<<< Updated upstream
+=======
+    <preConditions onFail="WARN">
+        <and>
+            <tableExists tableName="filedb"/>
+            <rowCount expectedRows="0"
+                      tableName="filedb"/>
+        </and>
+    </preConditions>
+    <changeSet id="2023-01-26-01-r0czak" author="r0czak">
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="cce454c4-a7e7-4904-97d4-b9f7d66ab3f8"/>
+            <column name="name" value="rckik_krakow_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/rckik_krakow_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="4a86784e-fa26-4c74-a6c2-5be23b4ad416"/>
+            <column name="name" value="rckik_radom_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/rckik_radom_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="d0e0ec76-f427-4882-b21b-e2800d130402"/>
+            <column name="name" value="rckik_gdansk_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/rckik_gdansk_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="3d8cd27e-0b74-43f5-84c4-1b34f81b79a4"/>
+            <column name="name" value="rckik_lodz_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/rckik_lodz_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="98e90d1f-026a-4118-a6fa-5a93b4e6f5b4"/>
+            <column name="name" value="rckik_warszawa_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/rckik_warszawa_1.jpg"/>
+        </insert>
+    </changeSet>
+
+
+>>>>>>> Stashed changes
+</databaseChangeLog>

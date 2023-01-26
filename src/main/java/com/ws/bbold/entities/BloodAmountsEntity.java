@@ -11,7 +11,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "blood_amounts_entity")
+@Table(name = "blood_amounts")
 public class BloodAmountsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

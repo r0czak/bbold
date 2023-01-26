@@ -10,17 +10,18 @@
             <rowCount expectedRows="0"
                       tableName="roles"/>
         </and>
-
     </preConditions>
-    <changeSet id="9670223482910-1" author="r0czak">
-        <sql>
-            INSERT INTO roles (name)
-            VALUES ('ROLE_USER');
-            INSERT INTO roles (name)
-            VALUES ('ROLE_MODERATOR');
-            INSERT INTO roles (name)
-            VALUES ('ROLE_ADMIN');
-        </sql>
+    <changeSet id="2023-01-18-r0czak-1" author="r0czak">
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_MODERATOR"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

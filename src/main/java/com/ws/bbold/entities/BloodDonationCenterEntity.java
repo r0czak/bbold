@@ -37,6 +37,7 @@ public class BloodDonationCenterEntity {
 
     private Double longitude;
 
+    @Size(max = 1000)
     private String description;
 
     @Size(max = 20)

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+<<<<<<< Updated upstream
+=======
+    <preConditions onFail="WARN">
+        <and>
+            <tableExists tableName="oppening_hours"/>
+            <rowCount expectedRows="0"
+                      tableName="oppening_hours"/>
+        </and>
+    </preConditions>
+    <changeSet id="2023-01-21-r0czak-01" author="r0czak">
+        <!-- Kraków -->
+        <insert tableName="opening_hours">
+            <column name="day" value="MONDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="16:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="TUESDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="16:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="WEDNESDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="16:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="THURSDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="16:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="FRIDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="16:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SATURDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SUNDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+        <!-- Radom -->
+        <insert tableName="opening_hours">
+            <column name="day" value="MONDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="TUESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="WEDNESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="THURSDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="FRIDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="13:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SATURDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SUNDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+        <!-- Gdańsk -->
+        <insert tableName="opening_hours">
+            <column name="day" value="MONDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="TUESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:15"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="WEDNESDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="THURSDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:15"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="FRIDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SATURDAY"/>
+            <column name="from" value="07:15"/>
+            <column name="to" value="13:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SUNDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+        <!-- Łódź -->
+        <insert tableName="opening_hours">
+            <column name="day" value="MONDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="15:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="TUESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="WEDNESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="15:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="THURSDAY"/>
+            <column name="from" value="06:30"/>
+            <column name="to" value="18:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="FRIDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="15:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SATURDAY"/>
+            <column name="from" value="08:00"/>
+            <column name="to" value="13:30"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SUNDAY"/>
+            <column name="from" value="08:00"/>
+            <column name="to" value="13:00"/>
+        </insert>
+        <!-- Warszawa -->
+        <insert tableName="opening_hours">
+            <column name="day" value="MONDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="TUESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="WEDNESDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="THURSDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="17:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="FRIDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="14:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SATURDAY"/>
+            <column name="from" value="07:00"/>
+            <column name="to" value="13:00"/>
+        </insert>
+        <insert tableName="opening_hours">
+            <column name="day" value="SUNDAY"/>
+            <column name="from" value=""/>
+            <column name="to" value=""/>
+        </insert>
+
+    </changeSet>
+
+
+>>>>>>> Stashed changes
+</databaseChangeLog>

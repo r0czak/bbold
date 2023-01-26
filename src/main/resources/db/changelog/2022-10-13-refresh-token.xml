@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1665612888895-1" author="r0czak">
+    <changeSet id="2022-10-13-r0czak-1" author="r0czak">
         <createTable tableName="refreshtoken">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_refreshtoken"/>
@@ -19,10 +19,10 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1665612888895-2" author="r0czak">
+    <changeSet id="2022-10-13-r0czak-2" author="r0czak">
         <addUniqueConstraint columnNames="token" constraintName="uc_refreshtoken_token" tableName="refreshtoken"/>
     </changeSet>
-    <changeSet id="1665612888895-3" author="r0czak">
+    <changeSet id="2022-10-13-r0czak-3" author="r0czak">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="refreshtoken"
                                  constraintName="FK_REFRESHTOKEN_ON_USER" referencedColumnNames="id"
                                  referencedTableName="users"/>
