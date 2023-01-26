@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
-<<<<<<< Updated upstream
-=======
     <preConditions onFail="WARN">
         <and>
             <tableExists tableName="blood_amounts"/>
@@ -66,7 +64,4 @@
             <column name="o_negative" valueNumeric="10"/>
         </insert>
     </changeSet>
-
-
->>>>>>> Stashed changes
 </databaseChangeLog>

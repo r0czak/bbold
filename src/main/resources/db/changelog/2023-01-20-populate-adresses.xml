@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
-<<<<<<< Updated upstream
-=======
     <preConditions onFail="WARN">
         <and>
             <tableExists tableName="address"/>
@@ -57,6 +55,4 @@
             <column name="zip_code" value="03-948"/>
         </insert>
     </changeSet>
-
->>>>>>> Stashed changes
 </databaseChangeLog>

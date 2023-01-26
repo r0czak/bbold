@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
-<<<<<<< Updated upstream
-=======
     <preConditions onFail="WARN">
         <and>
             <tableExists tableName="oppening_hours"/>
@@ -197,7 +195,4 @@
         </insert>
 
     </changeSet>
-
-
->>>>>>> Stashed changes
 </databaseChangeLog>
