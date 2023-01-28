@@ -1,10 +1,10 @@
-package com.ws.bbold.security.services.impl;
+package com.ws.bbold.entities.services.impl;
 
 import com.ws.bbold.entities.RefreshTokenEntity;
+import com.ws.bbold.entities.services.RefreshTokenService;
 import com.ws.bbold.exception.TokenRefreshException;
 import com.ws.bbold.repository.RefreshTokenRepository;
 import com.ws.bbold.repository.UserRepository;
-import com.ws.bbold.security.services.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

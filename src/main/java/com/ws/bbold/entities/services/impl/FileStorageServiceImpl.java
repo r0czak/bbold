@@ -1,8 +1,8 @@
-package com.ws.bbold.security.services.impl;
+package com.ws.bbold.entities.services.impl;
 
 import com.ws.bbold.entities.FileDBEntity;
+import com.ws.bbold.entities.services.FileStorageService;
 import com.ws.bbold.repository.FileDBRepository;
-import com.ws.bbold.security.services.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

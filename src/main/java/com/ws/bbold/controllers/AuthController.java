@@ -5,6 +5,7 @@ import com.ws.bbold.entities.RoleEntity;
 import com.ws.bbold.entities.UserDetailEntity;
 import com.ws.bbold.entities.UserEntity;
 import com.ws.bbold.entities.enums.ERole;
+import com.ws.bbold.entities.services.impl.RefreshTokenServiceImpl;
 import com.ws.bbold.exception.TokenRefreshException;
 import com.ws.bbold.payload.request.LoginRequest;
 import com.ws.bbold.payload.request.SignupRequest;
@@ -16,7 +17,6 @@ import com.ws.bbold.repository.RoleRepository;
 import com.ws.bbold.repository.UserDetailRepository;
 import com.ws.bbold.repository.UserRepository;
 import com.ws.bbold.security.jwt.JwtUtils;
-import com.ws.bbold.security.services.impl.RefreshTokenServiceImpl;
 import com.ws.bbold.security.services.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -87,17 +87,17 @@ public class AuthController {
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+          .body(new MessageResponse("Błąd: Nazwa użytkownika jest już zajęta"));
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Email is already in use!"));
+          .body(new MessageResponse("Błąd: Email jest już zajęty"));
     }
 
     if (userDetailRepository.existsByPesel(signUpRequest.getPesel())) {
       return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Pesel is already in use!"));
+          .body(new MessageResponse("Błąd: Pesel jest już zajęty"));
     }
 
     // Create new user's account
@@ -114,7 +114,7 @@ public class AuthController {
       RoleEntity userRole =
           roleRepository
               .findByName(ERole.ROLE_USER)
-              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+              .orElseThrow(() -> new RuntimeException("Error: Rola nie istnieje"));
       roles.add(userRole);
     } else {
       strRoles.forEach(
@@ -124,7 +124,7 @@ public class AuthController {
                 RoleEntity adminRole =
                     roleRepository
                         .findByName(ERole.ROLE_ADMIN)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        .orElseThrow(() -> new RuntimeException("Error: Rola nie istnieje"));
                 roles.add(adminRole);
 
                 break;
@@ -132,7 +132,7 @@ public class AuthController {
                 RoleEntity modRole =
                     roleRepository
                         .findByName(ERole.ROLE_MODERATOR)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        .orElseThrow(() -> new RuntimeException("Error: Rola nie istnieje"));
                 roles.add(modRole);
 
                 break;
@@ -140,7 +140,7 @@ public class AuthController {
                 RoleEntity userRole =
                     roleRepository
                         .findByName(ERole.ROLE_USER)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        .orElseThrow(() -> new RuntimeException("Error: Rola nie istnieje"));
                 roles.add(userRole);
             }
           });
@@ -161,7 +161,7 @@ public class AuthController {
     userRepository.save(user);
     userDetailRepository.save(userDetail);
 
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    return ResponseEntity.ok(new MessageResponse("Użytkownik zarejestrowany pomyślnie"));
   }
 
   @PostMapping("/refreshtoken")
@@ -180,7 +180,7 @@ public class AuthController {
         .orElseThrow(
             () ->
                 new TokenRefreshException(
-                    requestRefreshToken, "Refresh token is not in database!"));
+                    requestRefreshToken, "Refresh tokena nie ma w bazie"));
   }
 
   @PostMapping("/signout")
@@ -189,6 +189,6 @@ public class AuthController {
         (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Long userId = userDetails.getId();
     refreshTokenService.deleteByUserId(userId);
-    return ResponseEntity.ok(new MessageResponse("Log out successful!"));
+    return ResponseEntity.ok(new MessageResponse("Wylogowanie pomyślne"));
   }
 }

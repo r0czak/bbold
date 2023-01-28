@@ -1,4 +1,4 @@
-package com.ws.bbold.dto;
+package com.ws.bbold.payload.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -19,4 +19,5 @@
     <include file="/db/changelog/2023-01-21-populate-openning-hours.xml"/>
     <include file="/db/changelog/2023-01-26-populate-blood-donation-images.xml"/>
     <include file="/db/changelog/2023-01-26-populate-blood-donation-centers.xml"/>
+    <include file="/db/changelog/2023-01-28-populate-blood-donation-center-oppening-hours.xml"/>
 </databaseChangeLog>

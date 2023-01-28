@@ -1,10 +1,17 @@
 package com.ws.bbold.controllers;
 
-import com.ws.bbold.dto.BloodAmountsDTO;
 import com.ws.bbold.entities.BloodAmountsEntity;
-import com.ws.bbold.security.services.BloodDonationCenterService;
+import com.ws.bbold.entities.BloodDonationCenterEntity;
+import com.ws.bbold.entities.services.BloodDonationCenterService;
+import com.ws.bbold.payload.dto.BloodAmountsDTO;
+import com.ws.bbold.payload.dto.BloodCenterDetailsDTO;
+import com.ws.bbold.payload.dto.BloodCenterSimpleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -13,15 +20,47 @@ public class BloodDonationCenterController {
     @Autowired
     private BloodDonationCenterService bloodDonationCenterService;
 
-    @GetMapping("/blood-amounts")
-    @ResponseBody
-    public BloodAmountsDTO getBloodAmounts(@RequestParam Long id) {
-        BloodAmountsEntity bloodAmountsEntity = bloodDonationCenterService.getBloodAmountsByBloodDonationCenterId(id);
 
-        return convertToDTO(bloodAmountsEntity);
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<BloodCenterSimpleDTO>> getBloodDonationCenterList() {
+        List<BloodDonationCenterEntity> bloodDonationCenterEntities = bloodDonationCenterService.getAllBloodDonationCenters();
+
+        if (bloodDonationCenterEntities.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(convertToSimpleDTO(bloodDonationCenterEntities), HttpStatus.OK);
+        }
     }
 
-    private BloodAmountsDTO convertToDTO(BloodAmountsEntity bloodAmountsEntity) {
+    @GetMapping("/details")
+    @ResponseBody
+    public ResponseEntity<BloodCenterDetailsDTO> getBloodDonationCenterDetails(@RequestParam Long id) {
+            BloodDonationCenterEntity bloodDonationCenterEntity = bloodDonationCenterService.getBloodDonationCenterById(id);
+            return new ResponseEntity<>(convertToBloodDonationCenterDetailsDTO(bloodDonationCenterEntity), HttpStatus.OK);
+    }
+
+    @GetMapping("/blood-amounts")
+    @ResponseBody
+    public ResponseEntity<BloodAmountsDTO> getBloodAmounts(@RequestParam Long id) {
+            BloodAmountsEntity bloodAmountsEntity = bloodDonationCenterService.getBloodAmountsByBloodDonationCenterId(id);
+            return new ResponseEntity<>(convertToBloodAmountsDTO(bloodAmountsEntity), HttpStatus.OK);
+    }
+
+
+    private List<BloodCenterSimpleDTO> convertToSimpleDTO(List<BloodDonationCenterEntity> bloodDonationCenterEntities) {
+        List<BloodCenterSimpleDTO> bloodCenterSimpleDTOs = bloodDonationCenterEntities.stream().map(bloodDonationCenterEntity -> {
+            BloodCenterSimpleDTO bloodCenterSimpleDTO = new BloodCenterSimpleDTO(
+                bloodDonationCenterEntity.getId(),
+                bloodDonationCenterEntity.getName());
+            return bloodCenterSimpleDTO;
+        }).toList();
+
+        return bloodCenterSimpleDTOs;
+    }
+
+    private BloodAmountsDTO convertToBloodAmountsDTO(BloodAmountsEntity bloodAmountsEntity) {
         BloodAmountsDTO bloodAmountsDTO = new BloodAmountsDTO(
             bloodAmountsEntity.getAPositive(),
             bloodAmountsEntity.getANegative(),
@@ -33,5 +72,19 @@ public class BloodDonationCenterController {
             bloodAmountsEntity.getONegative());
 
         return bloodAmountsDTO;
+    }
+
+    private BloodCenterDetailsDTO convertToBloodDonationCenterDetailsDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
+        return new BloodCenterDetailsDTO(
+            bloodDonationCenterEntity.getId(),
+            bloodDonationCenterEntity.getName(),
+            bloodDonationCenterEntity.getAddress(),
+            bloodDonationCenterEntity.getOpeningHours(),
+            bloodDonationCenterEntity.getImage().getId(),
+            bloodDonationCenterEntity.getLattitude(),
+            bloodDonationCenterEntity.getLongitude(),
+            bloodDonationCenterEntity.getDescription(),
+            bloodDonationCenterEntity.getPhoneNumber(),
+            bloodDonationCenterEntity.getEmail());
     }
 }

@@ -1,4 +1,4 @@
-package com.ws.bbold.security.services;
+package com.ws.bbold.entities.services;
 
 
 import com.ws.bbold.entities.BloodAmountsEntity;

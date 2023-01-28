@@ -1,10 +1,12 @@
-package com.ws.bbold.security.services.impl;
+package com.ws.bbold.entities.services.impl;
 
 import com.ws.bbold.entities.BloodAmountsEntity;
 import com.ws.bbold.entities.BloodDonationCenterEntity;
+import com.ws.bbold.entities.services.BloodDonationCenterService;
+import com.ws.bbold.exception.ObjectNotFoundException;
+import com.ws.bbold.exception.ObjectNotFoundType;
 import com.ws.bbold.repository.BloodAmountsRepository;
 import com.ws.bbold.repository.BloodDonationCenterRepository;
-import com.ws.bbold.security.services.BloodDonationCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class BloodDonationCenterServiceImpl implements BloodDonationCenterServic
 
     @Override
     public BloodDonationCenterEntity getBloodDonationCenterById(Long id) {
-        return bloodDonationCenterRepository.findById(id).orElse(new BloodDonationCenterEntity());
+        return bloodDonationCenterRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_DONATION_CENTER, id));
     }
 
     @Override
@@ -30,7 +32,7 @@ public class BloodDonationCenterServiceImpl implements BloodDonationCenterServic
 
     @Override
     public BloodAmountsEntity getBloodAmountsByBloodDonationCenterId(Long id) {
-        return bloodAmountsRepository.getBloodAmountsEntitiesByBloodDonationCenterEntityId(id);
+        return bloodAmountsRepository.getBloodAmountsEntitiesByBloodDonationCenterEntityId(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_AMOUNTS, id));
     }
 
 }
