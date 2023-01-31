@@ -30,7 +30,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 
     @Override
     public Long getUserBloodDonationCenter(Long userId) {
-        UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.USER, userId));
+        UserDetailEntity userDetail = userDetailRepository.findByUserId(userId).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.USER, userId.toString()));
         BloodDonationCenterEntity bloodDonationCenter = bloodDonationCenterService.getBloodDonationCenterById(userDetail.getBloodDonationCenter().getId());
 
         return bloodDonationCenter.getId();

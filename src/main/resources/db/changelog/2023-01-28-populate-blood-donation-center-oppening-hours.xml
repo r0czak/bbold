@@ -12,7 +12,7 @@
                       tableName="blood_donation_center_opening_hours"/>
         </and>
     </preConditions>
-    <changeSet id="2023-01-28-01-r0czak" author="r0czak">
+    <changeSet id="2023-01-28-r0czak-1" author="r0czak">
         <!-- Kraków -->
         <insert tableName="blood_donation_center_opening_hours">
             <column name="blood_donation_center_entity_id" valueNumeric="1"/>

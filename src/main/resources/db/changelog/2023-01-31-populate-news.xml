@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+
+    <preConditions onFail="WARN">
+        <and>
+            <tableExists tableName="news"/>
+            <rowCount expectedRows="0"
+                      tableName="news"/>
+        </and>
+    </preConditions>
+
+    <changeSet id="2023-01-31-r0czak-4" author="r0czak">
+
+
+        <insert tableName="news">
+            <column name="title"
+                    value="Oferta pracy dla pielęgniarki/ratownika medycznego w Terenowym Oddziale w Wadowicach"/>
+            <column name="content" value="
+Regionalne Centrum Krwiodawstwa i Krwiolecznictwa  w Krakowie zatrudni  na stanowisko Pielęgniarka/ Ratownik medyczny w Terenowym Oddziale w Wadowicach
+
+ Wymagania niezbędne:
+
+Aktualne prawo wykonywania zawodu pielęgniarki/położnej  lub tytuł zawodowy ratownika medycznego
+Umiejętność pracy w zespole
+Dyspozycyjność i gotowość do pracy  również w weekendy
+Obsługa komputera oraz urządzeń biurowych
+Zakres zadań:
+
+Pobieranie krwi i jej składników oraz próbek krwi zgodnie z procedurami,
+Zapewnienie, aby krew i jej składniki były pobierane zgodnie z obowiązującymi procedurami i wymogami jakościowymi
+Prowadzenie wymaganej dokumentacji
+Czynności związane z identyfikacją dawcy
+Udział w akcjach wyjazdowych poboru krwi
+Propagowanie idei honorowego krwiodawstwa i pozytywne kształtowanie wizerunku RCKiK
+Oferujemy :
+
+Zatrudnienie w  ramach umowy o pracę  na pełny etat ( równoważny system czasu pracy)
+Dodatek za wysługę lat
+Świadczenia socjalne, dofinansowanie do wczasów, możliwość przystąpienia do ubezpieczenia grupowego na życie
+APLIKUJ ONLINE
+
+wyślij swoje CV na adres : a.kulka@rckik.krakow.pl lub skontaktuj się z nami :
+
+31-540 Kraków, ul Rzeźnicza 11; tel. 12 261 88 20 (sekretariat) , 12 261 88 14 (kadry)
+
+Na oferty czekamy do 31.01.2023 r.
+
+DOŁĄCZ DO NAS! Chwyć czerwoną nitkę i z nami ratuj zdrowie i życie
+
+Uprzejmie informujemy, że skontaktujemy się z wybranymi kandydatami
+
+Zakres danych, jakie kandydat powinien podać , by wziąć udział w rekrutacji:
+
+imię (imiona) i nazwisko;
+datę urodzenia;
+dane kontaktowe (wskazane przez kandydata);
+wykształcenie;
+kwalifikacje zawodowe ( o ile są niezbędne na aplikowane stanowisko)
+przebieg dotychczasowego zatrudnienia
+Jeśli Pani/Pan chce dobrowolnie podać dane dodatkowe, których nie wymagamy koniecznie w aplikacji należy umieścić klauzulę: „Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w niniejszym CV na potrzeby rekrutacji prowadzonej przez Regionalne Centrum Krwiodawstwa i Krwiolecznictwa w Krakowie  zgodnie z przepisami prawa z zakresu ochrony danych osobowych”.
+
+Jeśli Pani/Pan chce, może dodatkowo wyrazić zgodę na udział w kolejnych organizowanych przez nas procesach rekrutacji umieszczając w aplikacji klauzulę: ” Wyrażam zgodę na pozostawienie przekazanego dokumentu CV i wykorzystanie go w kolejnych procesach rekrutacyjnych prowadzonych przez Regionalne Centrum Krwiodawstwa i Krwiolecznictwa w Krakowie,  zgodnie z przepisami prawa z zakresu ochrony danych osobowych nie dłużej niż 12 miesięcy„
+
+Klauzula informacyjna dla osoby ubiegającej się o zatrudnienie
+
+Zgodnie z art.13 ust 1-2 rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych ( (Dz.Urz.UE L 119, s.1) – zwanego dalej RODO- informujemy, że:
+
+1.            Administratorem Pana(i) danych osobowych jest Regionalne Centrum Krwiodawstwa i Krwiolecznictwa w Krakowie przy ul. Rzeźniczej 11 31-540 Kraków
+
+2.            Wyznaczyliśmy inspektora ochrony danych, z którym można skontaktować się w sprawach ochrony swoich danych osobowych po adresem e-mail: iodo@rckik.krakow.pl lub pisemnie na adres siedziby Administratora.
+
+3.            Jako Administrator przetwarzamy Państwa dane osobowe w celu realizacji procesów rekrutacji Podstawą przetwarzania Państwa danych jest;
+
+a)            realizacja przepisów prawa – tj. art. 22(1) ustawy kodeks pracy, par. 12 pkt 1 Rozporządzenia Ministra Zdrowia a w sprawie sposobu przeprowadzania konkursu na niektóre stanowiska kierownicze w podmiocie leczniczym niebędącym przedsiębiorcą  – przesłanka art. 6 ust. 1 lit c RODO
+
+b)            zgoda –  w zakresie przetwarzania Państwa danych w  podczas rekrutacji w zakresie szerszym aniżeli wskazany art. 22(1) ustawy kodeks pracy jak i treść Rozporządzenia, jak również w przypadku kiedy wyrażają Państwo wolę udziału w przyszłych procesach rekrutacji – przesłanka art. 6 ust 1 lit a RODO
+
+Podanie danych wskazanych w art. 22(1) ustawy kodeks pracy jest obligatoryjne w przypadku zgody całkowicie dobrowolne, co oznacza możliwość jej cofnięcia w każdym czasie.
+
+5.            Dane osobowe są przetwarzane przez okres nie dłuższy niż do osiągnięcia celów lub w przypadku wyrażonej zgody tj. udziału w przyszłych rekrutacjach nie dłużej niż przez 12 miesiące od daty złożenia
+
+6.            Dane osobowe  nie będą udostępniane innym podmiotom
+
+7.            W wyniku przetwarzania danych przysługują Państwu, określone prawa wynikające z RODO
+
+a)            prawo dostępu do swoich danych oraz otrzymania ich kopii;
+
+b)            prawo do sprostowania (poprawiania) swoich danych;
+
+c)             prawo do usunięcia danych, ograniczenia przetwarzania danych;
+
+d)            prawo do wniesienia sprzeciwu wobec przetwarzania danych;
+
+e)            prawo do przenoszenia danych;
+
+f)             prawo do wniesienia skargi do organu nadzorczego UODO ul. Stawki 2 w Warszawie
+
+Należy wskazać iż realizacja niektórych praw może podlegać ograniczeniom wynikającym z realizacji przepisów prawa
+
+8.            Państwa dane nie będą przekazywane do Państwa trzecich 9.            Państwa dane nie będą przedmiotem zautomatyzowane procesu przetwarzania w tym profilowania
+
+"/>
+            <column name="date" valueDate="current_timestamp"/>
+            <column name="image_id" value="cce454c4-a7e7-4904-97d4-b9f7d66ab3f8"/>
+            <column name="address_id" valueNumeric="1"/>
+        </insert>
+
+        <insert tableName="news">
+            <column name="title" value="Krwiodawstwo w czasie pandemii"/>
+            <column name="content" value=""/>
+            <column name="date" valueDate="current_timestamp"/>
+            <column name="image_id" value="61cfafa4-f87f-44db-80cd-8d9d0f0d1660"/>
+            <column name="address_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

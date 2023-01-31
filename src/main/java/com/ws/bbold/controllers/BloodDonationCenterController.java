@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.ws.bbold.payload.dto.BloodAmountsDTO.convertToBloodAmountsDTO;
+import static com.ws.bbold.payload.dto.BloodCenterDetailsDTO.convertToBloodDonationCenterDetailsDTO;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("api/center")
 public class BloodDonationCenterController {
     @Autowired
     private BloodDonationCenterService bloodDonationCenterService;
-
 
 
     @GetMapping
@@ -30,7 +32,12 @@ public class BloodDonationCenterController {
         if (bloodDonationCenterEntities.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(convertToSimpleDTO(bloodDonationCenterEntities), HttpStatus.OK);
+            List<BloodCenterSimpleDTO> bloodCenterSimpleDTOs = bloodDonationCenterEntities
+                .stream()
+                .map(BloodCenterSimpleDTO::convertToBloodCenterSimpleDTO)
+                .toList();
+
+            return new ResponseEntity<>(bloodCenterSimpleDTOs, HttpStatus.OK);
         }
     }
 
@@ -46,45 +53,5 @@ public class BloodDonationCenterController {
     public ResponseEntity<BloodAmountsDTO> getBloodAmounts(@RequestParam Long id) {
             BloodAmountsEntity bloodAmountsEntity = bloodDonationCenterService.getBloodAmountsByBloodDonationCenterId(id);
             return new ResponseEntity<>(convertToBloodAmountsDTO(bloodAmountsEntity), HttpStatus.OK);
-    }
-
-
-    private List<BloodCenterSimpleDTO> convertToSimpleDTO(List<BloodDonationCenterEntity> bloodDonationCenterEntities) {
-        List<BloodCenterSimpleDTO> bloodCenterSimpleDTOs = bloodDonationCenterEntities.stream().map(bloodDonationCenterEntity -> {
-            BloodCenterSimpleDTO bloodCenterSimpleDTO = new BloodCenterSimpleDTO(
-                bloodDonationCenterEntity.getId(),
-                bloodDonationCenterEntity.getName());
-            return bloodCenterSimpleDTO;
-        }).toList();
-
-        return bloodCenterSimpleDTOs;
-    }
-
-    private BloodAmountsDTO convertToBloodAmountsDTO(BloodAmountsEntity bloodAmountsEntity) {
-        BloodAmountsDTO bloodAmountsDTO = new BloodAmountsDTO(
-            bloodAmountsEntity.getAPositive(),
-            bloodAmountsEntity.getANegative(),
-            bloodAmountsEntity.getBPositive(),
-            bloodAmountsEntity.getBNegative(),
-            bloodAmountsEntity.getAbPositive(),
-            bloodAmountsEntity.getAbNegative(),
-            bloodAmountsEntity.getOPositive(),
-            bloodAmountsEntity.getONegative());
-
-        return bloodAmountsDTO;
-    }
-
-    private BloodCenterDetailsDTO convertToBloodDonationCenterDetailsDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
-        return new BloodCenterDetailsDTO(
-            bloodDonationCenterEntity.getId(),
-            bloodDonationCenterEntity.getName(),
-            bloodDonationCenterEntity.getAddress(),
-            bloodDonationCenterEntity.getOpeningHours(),
-            bloodDonationCenterEntity.getImage().getId(),
-            bloodDonationCenterEntity.getLattitude(),
-            bloodDonationCenterEntity.getLongitude(),
-            bloodDonationCenterEntity.getDescription(),
-            bloodDonationCenterEntity.getPhoneNumber(),
-            bloodDonationCenterEntity.getEmail());
     }
 }

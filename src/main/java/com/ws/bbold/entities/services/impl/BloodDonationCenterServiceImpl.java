@@ -22,7 +22,7 @@ public class BloodDonationCenterServiceImpl implements BloodDonationCenterServic
 
     @Override
     public BloodDonationCenterEntity getBloodDonationCenterById(Long id) {
-        return bloodDonationCenterRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_DONATION_CENTER, id));
+        return bloodDonationCenterRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_DONATION_CENTER, id.toString()));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class BloodDonationCenterServiceImpl implements BloodDonationCenterServic
 
     @Override
     public BloodAmountsEntity getBloodAmountsByBloodDonationCenterId(Long id) {
-        return bloodAmountsRepository.getBloodAmountsEntitiesByBloodDonationCenterEntityId(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_AMOUNTS, id));
+        return bloodAmountsRepository.getBloodAmountsEntitiesByBloodDonationCenterEntityId(id).orElseThrow(() -> new ObjectNotFoundException(ObjectNotFoundType.BLOOD_AMOUNTS, id.toString()));
     }
 
 }

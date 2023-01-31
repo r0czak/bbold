@@ -12,7 +12,7 @@
                       tableName="blood_donation_center"/>
         </and>
     </preConditions>
-    <changeSet id="2023-01-26-r0czak-02" author="r0czak">
+    <changeSet id="2023-01-26-r0czak-2" author="r0czak">
         <sql>
             INSERT INTO blood_donation_center (name, address_id, image_id, blood_amounts_id, lattitude, longitude,
                                                description, phone_number, email)

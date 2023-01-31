@@ -5,6 +5,7 @@ public enum ObjectNotFoundType {
     BLOOD_DONATION_CENTER,
     BLOOD_AMOUNTS,
     FILE,
-    ADDRESS
+    ADDRESS,
+    NEWS
 }
 

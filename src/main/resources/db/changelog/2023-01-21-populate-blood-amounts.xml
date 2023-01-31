@@ -12,7 +12,7 @@
                       tableName="blood_amounts"/>
         </and>
     </preConditions>
-    <changeSet id="2023-01-21-r0czak-02" author="r0czak">
+    <changeSet id="2023-01-21-r0czak-2" author="r0czak">
         <insert tableName="blood_amounts">
             <column name="a_positive" valueNumeric="26"/>
             <column name="a_negative" valueNumeric="5"/>

@@ -12,7 +12,7 @@
                       tableName="filedb"/>
         </and>
     </preConditions>
-    <changeSet id="2023-01-26-01-r0czak" author="r0czak">
+    <changeSet id="2023-01-26-r0czak-1" author="r0czak">
         <insert tableName="filedb" schemaName="">
             <column name="id" value="cce454c4-a7e7-4904-97d4-b9f7d66ab3f8"/>
             <column name="name" value="rckik_krakow_1.jpg"/>
@@ -42,6 +42,12 @@
             <column name="name" value="rckik_warszawa_1.jpg"/>
             <column name="type" value="image/jpeg"/>
             <column name="data" valueBlobFile="../../images/rckik_warszawa_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="61cfafa4-f87f-44db-80cd-8d9d0f0d1660"/>
+            <column name="name" value="news_krakow_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/news_krakow_1.jpg"/>
         </insert>
     </changeSet>
 

@@ -11,6 +11,8 @@
     <include file="/db/changelog/2022-12-12-user-details.xml"/>
     <include file="/db/changelog/2022-12-12-add-user-id-to-user-details.xml"/>
     <include file="/db/changelog/2023-01-20-add-blood-center-file-address-blood-amounts-openning-hours.xml"/>
+    <include file="db/changelog/2023-01-31-add-news.xml"/>
+
 
     <!-- Always at the end-->
     <include file="/db/changelog/2023-01-18-populate-roles.xml"/>
@@ -20,4 +22,5 @@
     <include file="/db/changelog/2023-01-26-populate-blood-donation-images.xml"/>
     <include file="/db/changelog/2023-01-26-populate-blood-donation-centers.xml"/>
     <include file="/db/changelog/2023-01-28-populate-blood-donation-center-oppening-hours.xml"/>
+    <include file="/db/changelog/2023-01-31-populate-news.xml"/>
 </databaseChangeLog>
