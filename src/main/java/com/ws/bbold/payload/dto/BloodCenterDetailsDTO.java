@@ -1,7 +1,6 @@
 package com.ws.bbold.payload.dto;
 
 import com.ws.bbold.entities.AddressEntity;
-import com.ws.bbold.entities.BloodDonationCenterEntity;
 import com.ws.bbold.entities.OpeningHoursEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,17 +34,17 @@ public class BloodCenterDetailsDTO implements Serializable {
 
     private String email;
 
-    public static BloodCenterDetailsDTO convertToBloodDonationCenterDetailsDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
-        return new BloodCenterDetailsDTO(
-            bloodDonationCenterEntity.getId(),
-            bloodDonationCenterEntity.getName(),
-            bloodDonationCenterEntity.getAddress(),
-            bloodDonationCenterEntity.getOpeningHours(),
-            bloodDonationCenterEntity.getImage().getId(),
-            bloodDonationCenterEntity.getLattitude(),
-            bloodDonationCenterEntity.getLongitude(),
-            bloodDonationCenterEntity.getDescription(),
-            bloodDonationCenterEntity.getPhoneNumber(),
-            bloodDonationCenterEntity.getEmail());
-    }
+//    public static BloodCenterDetailsDTO convertToBloodDonationCenterDetailsDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
+//        return new BloodCenterDetailsDTO(
+//            bloodDonationCenterEntity.getId(),
+//            bloodDonationCenterEntity.getName(),
+//            bloodDonationCenterEntity.getAddress(),
+//            bloodDonationCenterEntity.getOpeningHours(),
+//            bloodDonationCenterEntity.getImage().getId(),
+//            bloodDonationCenterEntity.getLattitude(),
+//            bloodDonationCenterEntity.getLongitude(),
+//            bloodDonationCenterEntity.getDescription(),
+//            bloodDonationCenterEntity.getPhoneNumber(),
+//            bloodDonationCenterEntity.getEmail());
+//    }
 }

@@ -1,6 +1,5 @@
 package com.ws.bbold.payload.dto;
 
-import com.ws.bbold.entities.BloodAmountsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,17 +26,17 @@ public class BloodAmountsDTO implements Serializable {
 
     private Integer oNegative;
 
-    public static BloodAmountsDTO convertToBloodAmountsDTO(BloodAmountsEntity bloodAmountsEntity) {
-        BloodAmountsDTO bloodAmountsDTO = new BloodAmountsDTO(
-            bloodAmountsEntity.getAPositive(),
-            bloodAmountsEntity.getANegative(),
-            bloodAmountsEntity.getBPositive(),
-            bloodAmountsEntity.getBNegative(),
-            bloodAmountsEntity.getAbPositive(),
-            bloodAmountsEntity.getAbNegative(),
-            bloodAmountsEntity.getOPositive(),
-            bloodAmountsEntity.getONegative());
-
-        return bloodAmountsDTO;
-    }
+//    public static BloodAmountsDTO convertToBloodAmountsDTO(BloodAmountsEntity bloodAmountsEntity) {
+//        BloodAmountsDTO bloodAmountsDTO = new BloodAmountsDTO(
+//            bloodAmountsEntity.getAPositive(),
+//            bloodAmountsEntity.getANegative(),
+//            bloodAmountsEntity.getBPositive(),
+//            bloodAmountsEntity.getBNegative(),
+//            bloodAmountsEntity.getAbPositive(),
+//            bloodAmountsEntity.getAbNegative(),
+//            bloodAmountsEntity.getOPositive(),
+//            bloodAmountsEntity.getONegative());
+//
+//        return bloodAmountsDTO;
+//    }
 }

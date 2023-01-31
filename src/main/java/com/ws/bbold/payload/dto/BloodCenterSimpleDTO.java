@@ -1,6 +1,5 @@
 package com.ws.bbold.payload.dto;
 
-import com.ws.bbold.entities.BloodDonationCenterEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +15,11 @@ public class BloodCenterSimpleDTO implements Serializable {
     private Long id;
     private String name;
 
-    public static BloodCenterSimpleDTO convertToBloodCenterSimpleDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
-            BloodCenterSimpleDTO bloodCenterSimpleDTO = new BloodCenterSimpleDTO(
-                bloodDonationCenterEntity.getId(),
-                bloodDonationCenterEntity.getName());
-
-            return bloodCenterSimpleDTO;
-    }
+//    public static BloodCenterSimpleDTO convertToBloodCenterSimpleDTO(BloodDonationCenterEntity bloodDonationCenterEntity) {
+//            BloodCenterSimpleDTO bloodCenterSimpleDTO = new BloodCenterSimpleDTO(
+//                bloodDonationCenterEntity.getId(),
+//                bloodDonationCenterEntity.getName());
+//
+//            return bloodCenterSimpleDTO;
+//    }
 }

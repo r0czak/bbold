@@ -44,7 +44,7 @@ public class NewsController {
             } else {
                 List<NewsSimpleDTO> newsSimpleDTOs = newsEntities
                     .stream()
-                    .map(NewsSimpleDTO::convertToNewsSimpleDTO)
+                    .map(newsMapper::convertToNewsSimpleDTO)
                     .toList();
 
                 return new ResponseEntity<>(newsSimpleDTOs, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class NewsController {
             } else {
                 List<NewsSimpleDTO> newsSimpleDTOs = newsEntities
                     .stream()
-                    .map(NewsSimpleDTO::convertToNewsSimpleDTO)
+                    .map(newsMapper::convertToNewsSimpleDTO)
                     .toList();
 
                 return new ResponseEntity<>(newsSimpleDTOs, HttpStatus.OK);
