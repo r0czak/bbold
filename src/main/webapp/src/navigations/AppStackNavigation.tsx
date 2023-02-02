@@ -5,6 +5,7 @@ import WelcomePanel from '../pages/WelcomePanel';
 import LoginScreen from '../pages/LoginPanel';
 import RegistrationPanel from '../pages/RegistrationPanel';
 import HomePanel from '../pages/HomePanel';
+import SplashScreen from '../pages/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ const AppStackNavigation = () => {
       <Stack.Screen name="LoginPage" component={LoginScreen} />
       <Stack.Screen name="RegisterPage" component={RegistrationPanel} />
       <Stack.Screen name="HomePage" component={HomePanel} />
+      <Stack.Screen name="SplashScreen" component={SplashScreen} />
     </Stack.Navigator>
   );
 };

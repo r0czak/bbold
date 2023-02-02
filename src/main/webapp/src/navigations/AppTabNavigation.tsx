@@ -1,7 +1,10 @@
 import {View, Text, Button, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  useNavigation,
+} from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,11 +16,151 @@ import ResearchPanel from '../pages/ResearchPanel';
 import UserProfilePanel from '../pages/UserProfilePanel';
 import NewsViewPanel from '../pages/NewsViewPanel';
 
-import {AuthContext} from '../context/AuthContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
+const AppTabNavigation = () => {
+  const navigation = useNavigation();
+
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      screenOptions={({route}) => ({
+        tabBarActiveTintColor: '#ffc64a',
+        tabBarInactiveTintColor: '#ffffff',
+        tabBarStyle: {
+          backgroundColor: '#c43b3d',
+          padding: 5,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
+        headerShown: getHeaderBarVisibility(route),
+        headerStyle: {
+          backgroundColor: '#c43b3d',
+        },
+        headerTitleStyle: {
+          color: '#fff',
+        },
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('UserProfilePanel')}>
+            <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+          </TouchableOpacity>
+        ),
+      })}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={({route}) => ({
+          title: 'Główna',
+          tabBarStyle: {
+            display: getTabBarVisibility(route),
+            backgroundColor: '#c43b3d',
+            padding: 5,
+          },
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="Blood"
+        component={BloodPanelStack}
+        options={({route}) => ({
+          title: 'Krew',
+          tabBarStyle: {
+            display: getTabBarVisibility(route),
+            backgroundColor: '#c43b3d',
+            padding: 5,
+          },
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="water" color={color} size={size} />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="Map"
+        component={MapPanelStack}
+        options={({route}) => ({
+          title: 'Mapa',
+          tabBarStyle: {
+            display: getTabBarVisibility(route),
+            backgroundColor: '#c43b3d',
+            padding: 5,
+          },
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="google-maps"
+              color={color}
+              size={size}
+            />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="Discounts"
+        component={DiscountsPanelStack}
+        options={({route}) => ({
+          title: 'Zniżki',
+          tabBarStyle: {
+            display: getTabBarVisibility(route),
+            backgroundColor: '#c43b3d',
+            padding: 5,
+          },
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="ticket-percent"
+              color={color}
+              size={size}
+            />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="Research"
+        component={ResearchPanelStack}
+        options={({route}) => ({
+          title: 'Badania',
+          tabBarStyle: {
+            display: getTabBarVisibility(route),
+            backgroundColor: '#c43b3d',
+            padding: 5,
+          },
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="heart-pulse"
+              color={color}
+              size={size}
+            />
+          ),
+        })}
+      />
+    </Tab.Navigator>
+  );
+};
+
+const getTabBarVisibility = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+
+  if (routeName == 'NewsPanel' || routeName == 'UserProfilePanel') {
+    return 'none';
+  }
+
+  return 'flex';
+};
+
+const getHeaderBarVisibility = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+
+  if (routeName == 'NewsPanel' || routeName == 'UserProfilePanel') {
+    return false;
+  }
+
+  return true;
+};
 
 const HomeStack = () => {
   return (
@@ -32,6 +175,21 @@ const HomeStack = () => {
         component={NewsViewPanel}
         options={{
           title: 'Aktualności',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="UserProfilePanel"
+        component={UserProfilePanel}
+        options={{
+          title: 'Panel użytkownika',
+          // headerShown: false,
           headerStyle: {
             backgroundColor: '#c43b3d',
           },
@@ -44,172 +202,108 @@ const HomeStack = () => {
   );
 };
 
-const UserProfileStack = () => {
-  <Stack.Navigator>
-    <Stack.Screen name="UserProfile" component={UserProfilePanel} />
-  </Stack.Navigator>;
-};
-
-const AppTabNavigation = () => {
-  const {logout} = useContext(AuthContext);
-
+const BloodPanelStack = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={{
-        tabBarActiveTintColor: '#ffc64a',
-        tabBarInactiveTintColor: '#ffffff',
-        tabBarStyle: {
-          backgroundColor: '#c43b3d',
-          padding: 5,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-        },
-        headerStyle: {
-          backgroundColor: '#c43b3d',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
-      }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeStack}
-        options={({route}) => ({
-          title: 'Główna',
-          tabBarStyle: {
-            display: getTabBarVisibility(route),
-            backgroundColor: '#c43b3d',
-            padding: 5,
-          },
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-          // headerShown: getHeaderBarVisibility(route),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => {}}>
-              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
-            </TouchableOpacity>
-          ),
-        })}
-      />
-      <Tab.Screen
-        name="Blood"
+    <Stack.Navigator>
+      <Stack.Screen
+        name="BloodCard"
         component={BloodCardPanel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UserProfilePanel"
+        component={UserProfilePanel}
         options={{
-          title: 'Krew',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="water" color={color} size={size} />
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                logout();
-              }}>
-              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
-            </TouchableOpacity>
-          ),
+          title: 'Aktualności',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
         }}
       />
-      <Tab.Screen
-        name="Map"
-        component={MapPanel}
-        options={{
-          title: 'Mapa',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="google-maps"
-              color={color}
-              size={size}
-            />
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                logout();
-              }}>
-              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Discounts"
-        component={DiscountPanel}
-        options={{
-          title: 'Zniżki',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="ticket-percent"
-              color={color}
-              size={size}
-            />
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                logout();
-              }}>
-              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Research"
-        component={ResearchPanel}
-        options={{
-          title: 'Badania',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="heart-pulse"
-              color={color}
-              size={size}
-            />
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                logout();
-              }}>
-              <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 };
 
-const getTabBarVisibility = route => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-
-  if (routeName == 'NewsPanel' || routeName == 'UserProfile') {
-    return 'none';
-  }
-
-  return 'flex';
+const MapPanelStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MapPanelStack"
+        component={MapPanel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UserProfilePanel"
+        component={UserProfilePanel}
+        options={{
+          title: 'Aktualności',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
 };
 
-const getHeaderBarVisibility = route => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-
-  if (routeName == 'NewsPanel' || routeName == 'UserProfile') {
-    return false;
-  }
-
-  return true;
+const DiscountsPanelStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="DiscountPanelStack"
+        component={DiscountPanel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UserProfilePanel"
+        component={UserProfilePanel}
+        options={{
+          title: 'Aktualności',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
 };
 
-// const changeHeaderBarStyle = route => {
-//   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-
-//   if (routeName == 'NewsPanel' || routeName == 'UserProfile') {
-//     return false;
-//   }
-
-//   return true;
-// };
+const ResearchPanelStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ResearchPanelStack"
+        component={ResearchPanel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UserProfilePanel"
+        component={UserProfilePanel}
+        options={{
+          title: 'Aktualności',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 export default AppTabNavigation;
