@@ -15,7 +15,7 @@
 
     <changeSet id="2023-01-20-r0czak-16" author="r0czak">
         <insert tableName="address">
-            <column name="country" value="Poland"/>
+            <column name="country" value="Polska"/>
             <column name="city" value="Kraków"/>
             <column name="street" value="Rzeźnicza"/>
             <column name="street_number" value="11"/>
@@ -23,7 +23,7 @@
             <column name="zip_code" value="31-540"/>
         </insert>
         <insert tableName="address">
-            <column name="country" value="Poland"/>
+            <column name="country" value="Polska"/>
             <column name="city" value="Radom"/>
             <column name="street" value="Limanowskiego"/>
             <column name="street_number" value="42"/>
@@ -31,7 +31,7 @@
             <column name="zip_code" value="26-600"/>
         </insert>
         <insert tableName="address">
-            <column name="country" value="Poland"/>
+            <column name="country" value="Polska"/>
             <column name="city" value="Gdańsk"/>
             <column name="street" value="J. Hoene-Wrońskiego"/>
             <column name="street_number" value="4"/>
@@ -39,7 +39,7 @@
             <column name="zip_code" value="80-210"/>
         </insert>
         <insert tableName="address">
-            <column name="country" value="Poland"/>
+            <column name="country" value="Polska"/>
             <column name="city" value="Łódź"/>
             <column name="street" value="Franciszkańska"/>
             <column name="street_number" value="17"/>
@@ -47,7 +47,7 @@
             <column name="zip_code" value="91-433"/>
         </insert>
         <insert tableName="address">
-            <column name="country" value="Poland"/>
+            <column name="country" value="Polska"/>
             <column name="city" value="Warszawa"/>
             <column name="street" value="Saska "/>
             <column name="street_number" value="63"/>

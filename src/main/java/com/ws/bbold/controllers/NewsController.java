@@ -8,6 +8,7 @@ import com.ws.bbold.payload.dto.mapper.NewsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,42 +37,33 @@ public class NewsController {
     @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<NewsSimpleDTO>> getAllNews(@RequestParam Optional<Long> bloodCenterId) {
+        List<NewsEntity> newsEntities;
         if (bloodCenterId.isPresent()) {
-            List<NewsEntity> newsEntities = newsService.getNewsByLocation(bloodCenterId.get());
-
-            if (newsEntities.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                List<NewsSimpleDTO> newsSimpleDTOs = newsEntities
-                    .stream()
-                    .map(newsMapper::convertToNewsSimpleDTO)
-                    .toList();
-
-                return new ResponseEntity<>(newsSimpleDTOs, HttpStatus.OK);
-            }
+            newsEntities = newsService.getNewsByLocation(bloodCenterId.get());
         } else {
-            List<NewsEntity> newsEntities = newsService.getAllNews();
+            newsEntities = newsService.getAllNews();
+        }
 
-            if (newsEntities.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                List<NewsSimpleDTO> newsSimpleDTOs = newsEntities
-                    .stream()
-                    .map(newsMapper::convertToNewsSimpleDTO)
-                    .toList();
+        if (newsEntities.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            List<NewsSimpleDTO> newsSimpleDTOs = newsEntities
+                .stream()
+                .map(newsMapper::convertToNewsSimpleDTO)
+                .toList();
 
-                return new ResponseEntity<>(newsSimpleDTOs, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(newsSimpleDTOs, HttpStatus.OK);
         }
     }
 
     @PostMapping(consumes = {"multipart/form-data"})
     @ResponseBody
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
     public ResponseEntity<NewsDetailsDTO> addNews(
         @RequestPart("newsDetails") NewsDetailsDTO newsDetailsDTO,
         @RequestPart("image") @Valid MultipartFile image) {
 
-        NewsEntity newsEntity = newsMapper.toNewsEntity(newsDetailsDTO);
+        NewsEntity newsEntity = newsMapper.convertToNewsEntity(newsDetailsDTO);
         NewsDetailsDTO savedNews = newsMapper.convertToNewsDetailsDTO(newsService.addNews(newsEntity, image));
 
         return new ResponseEntity<>(savedNews, HttpStatus.OK);

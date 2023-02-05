@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <preConditions onFail="WARN">
+        <and>
+            <tableExists tableName="news"/>
+            <rowCount expectedRows="0"
+                      tableName="news"/>
+        </and>
+    </preConditions>
+    <changeSet id="2023-02-04-r0czak-1" author="r0czak">
+        <insert tableName="discounts">
+            <column name="title" value="Bezpłatne przejazdy w MPK w Krakowie"/>
+            <column name="content" value="Honorowy dawca krwi na podstawie Uchwały Nr XXI/231/11 Rady Miasta Krakowa z dnia 6 lipca
+2011 jest uprawniony do bezpłatnych przejazdów na terenie Gminy Miejskiej Kraków oraz gmin
+sąsiadujących.
+
+I. Aby otrzymać bilet wolnej jazdy należy:
+
+1. Oddać:
+• Kobiety - 15 litrów krwi pełniej lub odpowiadającej tej objętości ilość innych jej
+składników
+• Mężczyźni – 18 litrów krwi pełnej lub odpowiadającej tej objętości ilość innych jej
+składników
+2. Posiadać:
+• Legitymację Zasłużonego Honorowego dawcy Krwi (Leg. ZHDK)"/>
+            <column name="url"
+                    value="https://rckik.krakow.pl/bezplatne-przejazdy-w-krakowie-dla-zasluzonych-honorowych-dawcow-krwi"/>
+            <column name="date" valueDate="current_date"/>
+            <column name="image_id" value="4b912f05-9568-40b9-8e6e-2cb00eb07f12"/>
+            <column name="address_id" valueNumeric="1"/>
+        </insert>
+
+        <insert tableName="discounts">
+            <column name="title" value="Ogólnopolskie - Nowa ulga ustawowa 33% dla honorowych dawców krwi w POLREGIO"/>
+            <column name="content" value="Honorowemu dawcy krwi przysługuje ulga w wysokości 33 % przy przejazdach na podstawie biletów jednorazowych m. in. w 2 klasie pociągów osobowych, jeśli spełni poniższe:
+
+1. Oddał co najmniej 3 donacje krwi lub jej składników, w tym osocze po chorobie COVID-19.
+
+2. Posiada zaświadczenie potwierdzające warunek z pkt 1 wydane przez regionalne centrum, Wojskowe Centrum lub Centrum MSWiA (ważne 6 miesięcy).
+
+3. Zaświadczenie honorowego dawcy krwi stanowiące o ww. uldze powinno zawierać:
+
+a) datę wydania zaświadczenia;
+
+b) imię i nazwisko;
+
+c) numer PESEL;
+
+d) informację o oddaniu 3 donacji krwi lub jej składników, w tym osocza po chorobie COVID-19."/>
+            <column name="url"
+                    value="https://polregio.pl/pl/dla-podroznych/informacje/nowa-ulga-ustawowa-33-dla-honorowych-dawcow-krwi"/>
+            <column name="date" valueDate="current_date"/>
+            <column name="image_id" value="f106a637-8421-456e-bd07-57d50348c7d3"/>
+        </insert>
+
+        <insert tableName="discounts">
+            <column name="title" value="Brak kolejek u lekarza!"/>
+            <column name="content"
+                    value="Będąc Honorowym Dawcą Krwi masz prawo do korzystania ze świadczeń zdrowotnych poza kolejnością po okazaniu Karty Honorowego Dawcy Krwi!"/>
+            <column name="url" value=""/>
+            <column name="date" valueDate="current_date"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

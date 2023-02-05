@@ -17,37 +17,49 @@
             <column name="id" value="cce454c4-a7e7-4904-97d4-b9f7d66ab3f8"/>
             <column name="name" value="rckik_krakow_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/rckik_krakow_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/donation_center/rckik_krakow_1.jpg"/>
         </insert>
         <insert tableName="filedb" schemaName="">
             <column name="id" value="4a86784e-fa26-4c74-a6c2-5be23b4ad416"/>
             <column name="name" value="rckik_radom_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/rckik_radom_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/donation_center/rckik_radom_1.jpg"/>
         </insert>
         <insert tableName="filedb" schemaName="">
             <column name="id" value="d0e0ec76-f427-4882-b21b-e2800d130402"/>
             <column name="name" value="rckik_gdansk_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/rckik_gdansk_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/donation_center/rckik_gdansk_1.jpg"/>
         </insert>
         <insert tableName="filedb" schemaName="">
             <column name="id" value="3d8cd27e-0b74-43f5-84c4-1b34f81b79a4"/>
             <column name="name" value="rckik_lodz_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/rckik_lodz_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/donation_center/rckik_lodz_1.jpg"/>
         </insert>
         <insert tableName="filedb" schemaName="">
             <column name="id" value="98e90d1f-026a-4118-a6fa-5a93b4e6f5b4"/>
             <column name="name" value="rckik_warszawa_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/rckik_warszawa_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/donation_center/rckik_warszawa_1.jpg"/>
         </insert>
         <insert tableName="filedb" schemaName="">
             <column name="id" value="61cfafa4-f87f-44db-80cd-8d9d0f0d1660"/>
             <column name="name" value="news_krakow_1.jpg"/>
             <column name="type" value="image/jpeg"/>
-            <column name="data" valueBlobFile="../../images/news_krakow_1.jpg"/>
+            <column name="data" valueBlobFile="../../images/news/news_krakow_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="4b912f05-9568-40b9-8e6e-2cb00eb07f12"/>
+            <column name="name" value="discounts_krakow_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/discounts/discounts_krakow_1.jpg"/>
+        </insert>
+        <insert tableName="filedb" schemaName="">
+            <column name="id" value="f106a637-8421-456e-bd07-57d50348c7d3"/>
+            <column name="name" value="discounts_all_1.jpg"/>
+            <column name="type" value="image/jpeg"/>
+            <column name="data" valueBlobFile="../../images/discounts/discounts_all_1.jpg"/>
         </insert>
     </changeSet>
 
