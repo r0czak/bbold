@@ -18,7 +18,7 @@ import {AccordionList} from 'react-native-accordion-list-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = [
-  {title: 'a Rh+', bloodLevel: 15},
+  {title: 'A Rh+', bloodLevel: 15},
   {title: 'b Rh+', bloodLevel: 6},
   {title: 'a Rh-', bloodLevel: 18},
   {title: 'b Rh-', bloodLevel: 50},
@@ -74,7 +74,7 @@ const faq = [
 
 const HomePanel = ({navigation}: {navigation: any}) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <View>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.header}>Stany krwi w centrum </Text>
@@ -83,6 +83,7 @@ const HomePanel = ({navigation}: {navigation: any}) => {
           style={{
             borderColor: '#c43b3d',
             borderWidth: 1,
+            marginBottom: 5,
           }}
         />
         <FlatList
@@ -102,11 +103,8 @@ const HomePanel = ({navigation}: {navigation: any}) => {
             borderWidth: 1,
           }}
         />
-        <View
-          style={{
-            height: 260,
-          }}>
-          <ScrollView horizontal={true}>
+        <View style={{marginBottom: 10, height: 400}}>
+          <ScrollView nestedScrollEnabled={true}>
             {news.map((itemk, key) => {
               return (
                 <View key={key}>

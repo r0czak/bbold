@@ -13,14 +13,14 @@ const NewsCard = ({item, onPressFunctionality}) => {
           />
         </View>
         <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
-          <Text style={{color: '#464646', fontSize: 17}}>{item.title}</Text>
+          <Text style={{color: '#464646', fontSize: 18}}>{item.title}</Text>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               marginTop: 30,
             }}>
-            <Text style={{color: '#464646'}}> {item.date} </Text>
+            <Text style={{color: '#c43b3d'}}> {item.date} </Text>
             <Text style={{color: '#464646'}}> Czytaj więcej ... </Text>
           </View>
         </View>
@@ -31,7 +31,7 @@ const NewsCard = ({item, onPressFunctionality}) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: 270,
+    // width: 270,
     height: 240,
     backgroundColor: '#fff',
     borderRadius: 10,
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    width: null,
-    height: null,
+    width: '100%',
+    height: '100%',
     resizeMode: 'cover',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
