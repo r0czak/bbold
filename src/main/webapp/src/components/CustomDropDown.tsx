@@ -66,13 +66,13 @@ const CustomDropDown = ({
                 <TouchableOpacity
                   style={styles.listItem}
                   onPress={() => {
-                    setSelectedItem(item.desc);
+                    setSelectedItem(item.name);
                     setPicker(item.value);
                     setIsClicked(false);
                     onFocus();
                     setIsFocused(false);
                   }}>
-                  <Text style={{fontSize: 14}}>{item.desc}</Text>
+                  <Text style={{fontSize: 14}}>{item.name}</Text>
                 </TouchableOpacity>
               );
             }}
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
   dropDownList: {
     width: '100%',
     borderRadius: 7,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     alignSelf: 'center',
   },
   listItem: {
-    paddingLeft: 20,
+    paddingHorizontal: 10,
     width: '100%',
     height: 40,
     borderBottomWidth: 0.4,

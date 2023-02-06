@@ -12,6 +12,7 @@ const CustomInputField = ({
 }) => {
   const [hidePassword, setHidePassword] = React.useState(password);
   const [isFocused, setIsFocused] = React.useState(false);
+
   return (
     <>
       <View
@@ -22,7 +23,12 @@ const CustomInputField = ({
             alignItems: 'center',
           },
         ]}>
-        <Icon name={iconName} size={20} color="#666" style={{marginRight: 5}} />
+        <Icon
+          name={iconName}
+          size={20}
+          color="#4e4e4e"
+          style={{marginRight: 5}}
+        />
         <TextInput
           autoCorrect={false}
           onFocus={() => {
@@ -51,10 +57,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     width: '100%',
+    height: 45,
     borderColor: '#e8e8e8',
     borderWidth: 1,
     borderRadius: 7,
-    marginVertical: 5,
+    marginVertical: 3,
     paddingHorizontal: 10,
     flexDirection: 'row',
   },

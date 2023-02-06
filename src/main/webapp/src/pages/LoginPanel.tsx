@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,10 +13,10 @@ import {
 } from 'react-native';
 import CustomInputField from '../components/CustomInputField';
 import CustomButton from '../components/CustomButton';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import {AuthContext} from '../context/AuthContext';
-import {AxiosContext} from '../context/AxiosContext';
-import * as Keychain from 'react-native-keychain';
+// import {AxiosContext} from '../context/AxiosContext';
 
 const LoginPanel = ({navigation}) => {
   const [data, setData] = React.useState({
@@ -25,62 +25,48 @@ const LoginPanel = ({navigation}) => {
   });
 
   const [errors, setErrors] = React.useState({
-    username: '',
-    password: '',
+    usernameError: '',
+    passwordError: '',
   });
 
-  const {login, logout} = useContext(AuthContext);
+  const {login, isLoading}: any = useContext(AuthContext);
 
-  // const check_password_regex = password => {
-  //   return (
-  //     /[A-Z]/.test(password) &&
-  //     /[0-9]/.test(password) &&
-  //     /[aeiou]/.test(password) &&
-  //     /[A-Za-z0-9]{6}$/.test(password)
-  //   );
-  // };
-
-  const validate = () => {
+  const loginValidation = () => {
     Keyboard.dismiss();
-    let isValid = true;
+    let isValid: boolean = true;
 
     if (!data.username) {
-      handleError('Wprowadź nazwę użytkownika', 'username');
+      handleError('Wprowadź nazwę użytkownika', 'usernameError');
       isValid = false;
     } else if (data.username.length < 3) {
-      handleError('Wprowadź poprawną nazwę użytkownika', 'username');
+      handleError('Wprowadź poprawną nazwę użytkownika', 'usernameError');
       isValid = false;
     } else {
-      handleError('', 'username');
+      handleError('', 'usernameError');
       isValid = true;
     }
 
     if (!data.password) {
-      handleError('Wprowadź hasło', 'password');
+      handleError('Wprowadź hasło', 'passwordError');
       isValid = false;
-    } else if (data.password.length < 5) {
-      handleError('Wprowadź poprawne hasło', 'password');
+    } else if (data.password.length < 6) {
+      handleError('Wprowadź poprawne hasło', 'passwordError');
       isValid = false;
     } else {
-      handleError('', 'password');
+      handleError('', 'passwordError');
       isValid = true;
     }
 
-    // else if (!check_password_regex(data.password)) {
-    //   handleError('Wprowadź poprawne hasło', 'password');
-    //   isValid = false;
-    // } else {
-    //   handleError('', 'password');
-    //   isValid = true;
-    // }
-
-    if (isValid) {
-      // register();
-      console.log(
-        'username: ' + data.username + ' adn password: ' + data.password,
-      );
-    }
+    return isValid;
   };
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     setData('');
+  //     setErrors('');
+  //   });
+  //   return unsubscribe;
+  // }, [navigation]);
 
   const handleOnchange = (text, input) => {
     setData(prevState => ({...prevState, [input]: text}));
@@ -92,31 +78,18 @@ const LoginPanel = ({navigation}) => {
 
   const {height} = useWindowDimensions();
 
-  // const showAlert = () =>
-  //   Alert.alert(
-  //     'Błąd logowania!',
-  //     'Niepoprawna nazwa użytkownika bądź hasło.',
-  //     [
-  //       {
-  //         text: 'Ok',
-  //       },
-  //     ],
-  //     {
-  //       cancelable: true,
-  //       onDismiss: () =>
-  //         Alert.alert(
-  //           'This alert was dismissed by tapping outside of the alert dialog.',
-  //         ),
-  //     },
-  //   );
-
-  const onLoginPressed = () => {
-    //showAlert();
-    validate();
+  const handleLogin = () => {
+    if (loginValidation() == true) {
+      login(data.username, data.password);
+      console.log('login to app');
+    } else {
+      console.log('login validation error');
+    }
   };
 
   return (
     <View style={styles.container}>
+      <Spinner visible={isLoading} />
       <Image
         source={require('../../assets/images/appBanner.png')}
         style={[styles.logo, {height: height * 0.4}]}
@@ -125,54 +98,30 @@ const LoginPanel = ({navigation}) => {
       <View>
         <CustomInputField
           onChangeText={text => handleOnchange(text, 'username')}
-          //onFocus={() => handleError(null, 'username')}
+          onFocus={() => handleError(null, 'usernameError')}
           label="Username"
           placeholder="Nazwa użytkownika"
           iconName={'badge-account-horizontal'}
-          error={errors.username}
+          error={errors.usernameError}
           password={undefined}
         />
         <CustomInputField
-          //onChangeText={text => setPassword(text)}
           onChangeText={text => handleOnchange(text, 'password')}
-          //onFocus={() => handleError(null, 'password')}
+          onFocus={() => handleError(null, 'passwordError')}
           label="Password"
           placeholder="Hasło"
           iconName={'lock'}
-          error={errors.password}
+          error={errors.passwordError}
           password
         />
       </View>
-      {/* <CustomInputField
-        onChangeText={text => handleOnchange(text, 'username')}
-        //onFocus={() => handleError(null, 'username')}
-        label="Username"
-        placeholder="Nazwa użytkownika"
-        iconName={'badge-account-horizontal'}
-        error={errors.username}
-      />
-      <CustomInputField
-        onChangeText={text => handleOnchange(text, 'password')}
-        //onFocus={() => handleError(null, 'password')}
-        label="Password"
-        placeholder="Hasło"
-        iconName={'lock'}
-        error={errors.password}
-        password
-      /> */}
       <View style={{marginTop: 5}}>
         <TouchableOpacity onPress={undefined}>
           <Text style={{color: '#fff'}}> Zapomniałeś hasła? </Text>
         </TouchableOpacity>
       </View>
 
-      <CustomButton
-        title="Zaloguj"
-        //onPress={() => onLoginPressed()}
-        onPress={() => {
-          login(data.username, data.password);
-        }}
-      />
+      <CustomButton title="Zaloguj" onPress={() => handleLogin()} />
 
       <View style={styles.loginLinkView}>
         <Text style={styles.loginLinkText}>
@@ -192,6 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#c43b3d',
+    opacity: 0.95,
   },
   logo: {
     width: '70%',
