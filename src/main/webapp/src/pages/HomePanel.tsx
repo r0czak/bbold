@@ -10,7 +10,7 @@ import {
   Button,
   SafeAreaView,
 } from 'react-native';
-
+import axios from 'axios';
 import BloodLevelItem from '../components/BloodLevelItem';
 import NewsCard from '../components/NewsCard';
 import AccordionItem from '../components/AccordionItem';
@@ -28,27 +28,27 @@ const data = [
   {title: '0 Rh-', bloodLevel: 9},
 ];
 
-const news = [
-  {
-    title: 'Nowy rok z krwiodawstwem',
-    bodyText: 'lelum polelum ipsum',
-    date: '28.11.22',
-    imageURL: '',
-  },
-  {
-    title: 'Zmiany rejestracji dawców',
-    bodyText: 'lelum polelum ipsum',
-    date: '31.11.22',
-    imageURL: '',
-  },
-  {
-    title: 'Oddaj krew w akcji mikołajkowej',
-    bodyText:
-      'lelum polelum ipsum wjiwejaioweowfejiowejio jioawejiofioawjejioweaf',
-    date: '12.12.12',
-    imageURL: '',
-  },
-];
+// const news = [
+//   {
+//     title: 'Nowy rok z krwiodawstwem',
+//     bodyText: 'lelum polelum ipsum',
+//     date: '28.11.22',
+//     imageURL: '',
+//   },
+//   {
+//     title: 'Zmiany rejestracji dawców',
+//     bodyText: 'lelum polelum ipsum',
+//     date: '31.11.22',
+//     imageURL: '',
+//   },
+//   {
+//     title: 'Oddaj krew w akcji mikołajkowej',
+//     bodyText:
+//       'lelum polelum ipsum wjiwejaioweowfejiowejio jioawejiofioawjejioweaf',
+//     date: '12.12.12',
+//     imageURL: '',
+//   },
+// ];
 
 const faq = [
   {
@@ -73,6 +73,19 @@ const faq = [
 ];
 
 const HomePanel = ({navigation}: {navigation: any}) => {
+  const [news, setNews] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      axios
+        .get(`http://10.0.2.2:8082/api/news/all`)
+        .then(response => setNews(response.data))
+        .catch(error => console.log(error));
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
       <View>
@@ -105,13 +118,13 @@ const HomePanel = ({navigation}: {navigation: any}) => {
         />
         <View style={{marginBottom: 10, height: 400}}>
           <ScrollView nestedScrollEnabled={true}>
-            {news.map((itemk, key) => {
+            {news.map((item, key) => {
               return (
                 <View key={key}>
                   <NewsCard
-                    item={itemk}
+                    item={item}
                     onPressFunctionality={() =>
-                      navigation.navigate('NewsPanel', {item: itemk})
+                      navigation.navigate('NewsPanel', {item: item})
                     }
                   />
                 </View>

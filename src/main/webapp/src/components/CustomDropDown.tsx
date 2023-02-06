@@ -59,7 +59,7 @@ const CustomDropDown = ({
       </Pressable>
       {isClicked ? (
         <View style={styles.dropDownList}>
-          <FlatList
+          {/* <FlatList
             data={listData}
             renderItem={({item, index}) => {
               return (
@@ -67,7 +67,7 @@ const CustomDropDown = ({
                   style={styles.listItem}
                   onPress={() => {
                     setSelectedItem(item.name);
-                    setPicker(item.value);
+                    setPicker(item.id);
                     setIsClicked(false);
                     onFocus();
                     setIsFocused(false);
@@ -76,7 +76,22 @@ const CustomDropDown = ({
                 </TouchableOpacity>
               );
             }}
-          />
+          /> */}
+          {listData.map((item, index) => (
+            <View key={index}>
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => {
+                  setSelectedItem(item.name);
+                  setPicker(item.id);
+                  setIsClicked(false);
+                  onFocus();
+                  setIsFocused(false);
+                }}>
+                <Text style={{fontSize: 14}}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         </View>
       ) : null}
       {error && <Text style={styles.errorMessage}>{error}</Text>}

@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 
 import {AuthProvider} from './src/context/AuthContext';
+import {FetchProvider} from './src/context/FetchContext';
 import AppNavigation from './src/navigations/AppNavigation';
 import AppTabNavigation from './src/navigations/AppTabNavigation';
 
@@ -13,12 +14,14 @@ const App = () => {
   // const [userToken, setUserToken] = React.useState<any>(null);
 
   return (
-    <AuthProvider>
-      <NavigationContainer>
+    <FetchProvider>
+      <AuthProvider>
+        <AppNavigation />
+        {/* <NavigationContainer>
         <AppTabNavigation />
-      </NavigationContainer>
-      {/* <AppNavigation /> */}
-    </AuthProvider>
+      </NavigationContainer> */}
+      </AuthProvider>
+    </FetchProvider>
   );
 };
 

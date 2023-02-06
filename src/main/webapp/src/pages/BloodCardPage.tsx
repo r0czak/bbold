@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BloodCard from '../components/BloodCard';
@@ -93,13 +86,7 @@ const BloodCardPanel = () => {
           borderBottomWidth: StyleSheet.hairlineWidth,
         }}
       />
-      <FlatList
-        key={4}
-        data={data}
-        //style={styles.cards}
-        renderItem={BloodCard}
-        numColumns={2}
-      />
+      <FlatList key={4} data={data} renderItem={BloodCard} numColumns={2} />
     </View>
   );
 };

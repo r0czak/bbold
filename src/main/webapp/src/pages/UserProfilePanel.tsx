@@ -19,7 +19,7 @@ const UserProfilePanel = () => {
   const {userInfo, logout, isLoading}: any = React.useContext(AuthContext);
 
   const [bloodPoints, setBloodPoints] = React.useState({});
-  const [cityId, setCityId] = React.useState(null);
+  const [cityId, setCityId] = React.useState();
 
   const fetchBloodPoints = () => {
     axios
@@ -28,7 +28,17 @@ const UserProfilePanel = () => {
       .catch(error => console.log(error));
   };
 
-  const setBloodPointId = () => {};
+  const setBloodPointId = value => {
+    // setCityId(value);
+    if (cityId != null) {
+      AsyncStorage.setItem('cityId', cityId);
+    }
+  };
+
+  // const handleOnChange = (value, input) => {
+  //   setData(prevState => ({...prevState, [input]: value}));
+  // };
+  // setPicker={value => handleOnChange(value, 'gender')}
 
   useEffect(() => {
     fetchBloodPoints();
@@ -45,7 +55,10 @@ const UserProfilePanel = () => {
         </View>
         <View style={styles.userHeaderText}>
           <Text style={{fontSize: 22, color: '#000'}}> JAN KOWALSKI </Text>
-          <Text style={{marginTop: 5, fontSize: 20}}> username </Text>
+          <Text style={{marginTop: 5, fontSize: 20}}>
+            {' '}
+            {userInfo.username}{' '}
+          </Text>
         </View>
       </View>
 
@@ -102,7 +115,7 @@ const UserProfilePanel = () => {
         }}
       />
       <CustomDropDown
-        setPicker={undefined}
+        setPicker={setBloodPointId}
         //onFocus={() => handleError(null, 'bloodTypeError')}
         listData={bloodPoints}
         iconName={'google-maps'}

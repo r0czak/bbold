@@ -1,32 +1,29 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Image,
-  ScrollView,
-  Button,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, Button} from 'react-native';
 
 const NewsViewPanel = ({route}) => {
   return (
-    <ScrollView style={styles.container}>
-      <View>
+    <ScrollView>
+      <Image
+        style={styles.image}
+        source={require('../../assets/images/2.png')}
+      />
+      <View style={styles.container}>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.header}>{route.params?.item.title}</Text>
         </View>
         <View
           style={{
             margin: 5,
-            borderColor: 'red',
+            borderColor: '#c43b3d',
             borderWidth: 1,
           }}
         />
-      </View>
-      <View style={{paddingBottom: 10}}>
-        <View>
-          <Text> {route.params?.item.bodyText} </Text>
+        <View style={{paddingBottom: 10}}>
+          <Text style={styles.dateText}> Data: {route.params?.item.date} </Text>
+        </View>
+        <View style={{paddingBottom: 10}}>
+          <Text style={styles.description}> {route.params?.item.content} </Text>
         </View>
       </View>
     </ScrollView>
@@ -36,31 +33,26 @@ const NewsViewPanel = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
-    padding: 5,
-  },
-  uncontainer1: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  uncontainer: {
-    flex: 0.5,
-    backgroundColor: '#ffffff',
-    margin: 5,
+    backgroundColor: '#f0f0f0',
+    padding: 10,
   },
   header: {
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: 20,
     color: '#c43b3d',
-    marginTop: 5,
   },
   description: {
-    fontSize: 12,
-    color: 'gray',
-    padding: 5,
+    fontSize: 14,
+    color: '#000',
   },
-  startText: {
-    color: '#fff',
+  dateText: {
+    fontSize: 14,
+    color: '#808080',
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'stretch',
   },
 });
 

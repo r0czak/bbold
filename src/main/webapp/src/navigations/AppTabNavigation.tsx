@@ -40,14 +40,16 @@ const AppTabNavigation = () => {
         headerShown: getHeaderBarVisibility(route),
         headerStyle: {
           backgroundColor: '#c43b3d',
+          height: 45,
         },
         headerTitleStyle: {
           color: '#fff',
         },
         headerRight: () => (
           <TouchableOpacity
+            style={{margin: 10}}
             onPress={() => navigation.navigate('UserProfilePanel')}>
-            <MaterialCommunityIcons name={'account'} color="#fff" size={25} />
+            <MaterialCommunityIcons name={'account'} color="#fff" size={27} />
           </TouchableOpacity>
         ),
       })}>

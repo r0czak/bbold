@@ -18,19 +18,19 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 
 const genderOption = [
-  {id: '1', value: 'MALE', name: 'Mężczyzna'},
-  {id: '2', value: 'FEMALE', name: 'Kobieta'},
+  {key: '1', id: 'MALE', name: 'Mężczyzna'},
+  {key: '2', id: 'FEMALE', name: 'Kobieta'},
 ];
 
 const bloodTypeOption = [
-  {id: '1', value: 'A_POSITIVE', name: 'A Rh+'},
-  {id: '2', value: 'A_NEGATIVE', name: 'A Rh-'},
-  {id: '3', value: 'B_POSITIVE', name: 'B Rh+'},
-  {id: '4', value: 'B_NEGATIVE', name: 'B Rh-'},
-  {id: '5', value: 'AB_POSITIVE', name: 'AB Rh+'},
-  {id: '6', value: 'AB_NEGATIVE', name: 'AB Rh-'},
-  {id: '7', value: '0_POSITIVE', name: '0 Rh+'},
-  {id: '8', value: '0_NEGATIVE', name: '0 Rh-'},
+  {key: '1', id: 'A_POSITIVE', name: 'A Rh+'},
+  {key: '2', id: 'A_NEGATIVE', name: 'A Rh-'},
+  {key: '3', id: 'B_POSITIVE', name: 'B Rh+'},
+  {key: '4', id: 'B_NEGATIVE', name: 'B Rh-'},
+  {key: '5', id: 'AB_POSITIVE', name: 'AB Rh+'},
+  {key: '6', id: 'AB_NEGATIVE', name: 'AB Rh-'},
+  {key: '7', id: '0_POSITIVE', name: '0 Rh+'},
+  {key: '8', id: '0_NEGATIVE', name: '0 Rh-'},
 ];
 
 const RegistrationPanel = ({navigation}) => {
@@ -179,7 +179,7 @@ const RegistrationPanel = ({navigation}) => {
       style={styles.backgroundImage}>
       <Spinner visible={isLoading} />
       <ScrollView style={styles.container}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', margin: 5}}>
           <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}>
             <Icon name="arrow-left-thick" size={28} color="#fff" />
           </TouchableOpacity>
@@ -190,7 +190,7 @@ const RegistrationPanel = ({navigation}) => {
         resizeMode="contain"
         style={styles.backgroundImage}> */}
         <View>
-          <Text style={{color: '#fff', fontSize: 17}}>
+          <Text style={{color: '#fff', fontSize: 16}}>
             Dane szczegółowe dawcy
           </Text>
           <CustomInputField
@@ -243,7 +243,7 @@ const RegistrationPanel = ({navigation}) => {
             error={errors.bloodTypeError}
           />
           <View style={{marginTop: 25}} />
-          <Text style={{color: '#fff', fontSize: 17}}> Dane logowania </Text>
+          <Text style={{color: '#fff', fontSize: 16}}> Dane logowania </Text>
           <CustomInputField
             onChangeText={value => handleOnChange(value, 'username')}
             onFocus={() => handleError(null, 'usernameError')}
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#c43b3d',
     // opacity: 0.8,
-    padding: 20,
+    padding: 10,
   },
   backgroundImage: {
     flex: 1,

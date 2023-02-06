@@ -9,23 +9,18 @@ const setImage = bloodLevel => {
   if (bloodLevel <= 10) {
     imageURL = require('../../assets/images/alarmBloodDrop.png');
     description = 'stan alarmowy';
-    console.log('bloodLevel < 10');
   } else if (bloodLevel > 10 && bloodLevel <= 25) {
     imageURL = require('../../assets/images/verylowBloodDrop.png');
     description = 'stan bardzo niski';
-    console.log('bloodLevel < 2250');
   } else if (bloodLevel > 25 && bloodLevel <= 50) {
     imageURL = require('../../assets/images/lowBloodDrop.png');
     description = 'stan niski';
-    console.log('bloodLevel < 400');
   } else if (bloodLevel > 50 && bloodLevel <= 75) {
     imageURL = require('../../assets/images/mediumBloodDrop.png');
     description = 'stan średni';
-    console.log('bloodLevel < 400');
   } else if (bloodLevel > 75) {
     imageURL = require('../../assets/images/highBloodDrop.png');
     description = 'stan wysoki';
-    console.log('bloodLevel < 400');
   }
 };
 

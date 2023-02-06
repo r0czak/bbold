@@ -1,18 +1,19 @@
-//AuthContext.js
-import React, {createContext, useState, useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, {createContext, useState, useEffect, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
 import axios from 'axios';
 import LoginPanel from '../pages/LoginPanel';
+import {FetchContext} from '../context/FetchContext';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [splashLoading, setSplashLoading] = React.useState(false);
-  const [userToken, setUserToken] = React.useState(null);
+  const [userToken, setUserToken] = React.useState({});
   const [userInfo, setUserInfo] = React.useState({});
+
+  const {fetchAppData}: any = useContext(FetchContext);
 
   const login = (username, password) => {
     setIsLoading(true);
@@ -28,6 +29,7 @@ const AuthProvider = ({children}) => {
 
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
         //AsyncStorage.setItem('userToken', userInfo.accessToken);
+        fetchAppData();
         setIsLoading(false);
       })
       .catch(e => {
@@ -120,11 +122,14 @@ const AuthProvider = ({children}) => {
         setUserInfo({});
         setIsLoading(false);
       });
+
+    setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
+      fetchAppData();
 
       let userInfo = await AsyncStorage.getItem('userInfo');
       //let userToken = await AsyncStorage.getItem('userToken');
@@ -134,7 +139,6 @@ const AuthProvider = ({children}) => {
         setUserInfo(userInfo);
         //setUserToken(userToken);
       }
-
       setSplashLoading(false);
     } catch (error) {
       setSplashLoading(false);

@@ -5,7 +5,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 const NewsCard = ({item, onPressFunctionality}) => {
   return (
     <Pressable onPress={onPressFunctionality}>
-      <View style={styles.cardContainer}>
+      {/* <View style={styles.cardContainer}>
         <View style={{flex: 1.5}}>
           <Image
             source={require('../../assets/images/2.png')}
@@ -24,6 +24,19 @@ const NewsCard = ({item, onPressFunctionality}) => {
             <Text style={{color: '#464646'}}> Czytaj więcej ... </Text>
           </View>
         </View>
+      </View> */}
+      <View style={styles.cardContainer}>
+        <Image
+          style={styles.imageContainer}
+          source={require('../../assets/images/2.png')}
+        />
+        <View style={styles.cardText}>
+          <Text style={styles.cardTitle}>{item.title}</Text>
+          <View style={styles.cardTextInfo}>
+            <Text style={{color: '#fff'}}> {item.date} </Text>
+            <Text style={{color: '#fff'}}> Czytaj więcej {'>'} </Text>
+          </View>
+        </View>
       </View>
     </Pressable>
   );
@@ -31,20 +44,32 @@ const NewsCard = ({item, onPressFunctionality}) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    // width: 270,
-    height: 240,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    elevation: 3,
+    height: 220,
+    flexDirection: 'row',
     margin: 5,
   },
   imageContainer: {
-    flex: 1,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    position: 'absolute',
+    borderRadius: 10,
+  },
+  cardText: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    alignSelf: 'flex-end',
+    borderRadius: 10,
+  },
+  cardTextInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 15,
+    marginVertical: 10,
+  },
+  cardTitle: {
+    color: '#fff',
+    fontSize: 18,
+    margin: 10,
   },
 });
 
