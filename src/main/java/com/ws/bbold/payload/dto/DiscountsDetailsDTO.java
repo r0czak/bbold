@@ -1,5 +1,6 @@
 package com.ws.bbold.payload.dto;
 
+import com.ws.bbold.entities.AddressEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,12 +13,16 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @Builder
-public class NewsSimpleDTO implements Serializable {
+public class DiscountsDetailsDTO implements Serializable {
     String title;
 
     String content;
 
+    LocalDate date;
+
     String imageId;
 
-    LocalDate date;
+    AddressEntity address;
+
+    String url;
 }

@@ -5,6 +5,7 @@ import com.ws.bbold.security.services.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class UserController {
 
     @PostMapping("/center")
     @ResponseBody
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> setUserBloodDonationCenter(@AuthenticationPrincipal UserDetailsImpl user, @RequestParam Long centerId) {
         userDetailService.setUserBloodDonationCenter(user.getId(), centerId);
         return ResponseEntity.ok("Zmieniono centrum krwiodawstwa");

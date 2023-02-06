@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @Builder
-public class NewsSimpleDTO implements Serializable {
+public class DiscountsSimpleDTO implements Serializable {
     String title;
 
     String content;

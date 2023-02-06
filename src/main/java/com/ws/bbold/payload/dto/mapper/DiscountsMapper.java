@@ -1,29 +1,29 @@
 package com.ws.bbold.payload.dto.mapper;
 
+import com.ws.bbold.entities.DiscountEntity;
 import com.ws.bbold.entities.FileDBEntity;
-import com.ws.bbold.entities.NewsEntity;
 import com.ws.bbold.entities.services.FileStorageService;
-import com.ws.bbold.payload.dto.NewsDetailsDTO;
-import com.ws.bbold.payload.dto.NewsSimpleDTO;
+import com.ws.bbold.payload.dto.DiscountsDetailsDTO;
+import com.ws.bbold.payload.dto.DiscountsSimpleDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
-public abstract class NewsMapper {
+public abstract class DiscountsMapper {
     @Autowired
-    protected FileStorageService fileStorageService;
+    FileStorageService fileStorageService;
 
-    @Mapping(target ="imageId", expression = "java(newsEntity.getImage() != null ? newsEntity.getImage().getId() : null)")
-    public abstract NewsDetailsDTO convertToNewsDetailsDTO(NewsEntity newsEntity);
+    @Mapping(target = "imageId", expression = "java(discountsEntity.getImage() != null ? discountsEntity.getImage().getId() : null)")
+    public abstract DiscountsDetailsDTO convertToDiscountsDetailsDTO(DiscountEntity discountsEntity);
 
     @Mapping(target = "image", source = "imageId", qualifiedByName = {"checkIfFileExists"})
-    public abstract NewsEntity convertToNewsEntity(NewsDetailsDTO newsDetailsDTO);
+    public abstract DiscountEntity convertToDiscountEntity(DiscountsDetailsDTO discountsDetailsDTO);
 
     @Mapping(target = "content", source = "content", qualifiedByName = {"shortenContent"})
-    @Mapping(target = "imageId", expression = "java(newsEntity.getImage() != null ? newsEntity.getImage().getId() : null)")
-    public abstract NewsSimpleDTO convertToNewsSimpleDTO(NewsEntity newsEntity);
+    @Mapping(target = "imageId", expression = "java(discountsEntity.getImage() != null ? discountsEntity.getImage().getId() : null)")
+    public abstract DiscountsSimpleDTO convertToDiscountsSimpleDTO(DiscountEntity discountsEntity);
 
     @Named("checkIfFileExists")
     public FileDBEntity checkIfFileExists(String imageId) {
@@ -48,4 +48,3 @@ public abstract class NewsMapper {
         return shortContent;
     }
 }
-
