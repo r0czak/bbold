@@ -18,25 +18,20 @@ export function RegisterValidation(
     isValid = true;
   }
 
-  if (!data.password || data.password.length < 6) {
+  if (
+    !data.password ||
+    data.password.length < 6 ||
+    !passwordRegex.test(data.password)
+  ) {
     handleError('Wprowadź poprawne hasło', 'passwordError');
-    isValid = false;
-  } else if (passwordRegex.test(data.password)) {
-    handleError(
-      'Hasło powinno zawierać dużą literę, liczbę i znak specjalny, minimum 6 znaków',
-      'passwordError',
-    );
     isValid = false;
   } else {
     handleError('', 'passwordError');
     isValid = true;
   }
 
-  if (!data.email) {
+  if (!data.email || !emailRegex.test(data.email)) {
     handleError('Wprowadź email', 'emailError');
-    isValid = false;
-  } else if (emailRegex.test(data.email) || data.email.length < 5) {
-    handleError('Wprowadź poprawny email', 'emailError');
     isValid = false;
   } else {
     handleError('', 'emailError');

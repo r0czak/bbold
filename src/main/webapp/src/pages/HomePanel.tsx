@@ -15,6 +15,7 @@ import BloodLevelItem from '../components/BloodLevelItem';
 import NewsCard from '../components/NewsCard';
 import AccordionItem from '../components/AccordionItem';
 import {AccordionList} from 'react-native-accordion-list-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = [
   {title: 'a Rh+', bloodLevel: 15},
@@ -76,7 +77,7 @@ const HomePanel = ({navigation}: {navigation: any}) => {
     <ScrollView style={styles.container}>
       <View>
         <View style={{alignItems: 'center'}}>
-          <Text style={styles.header}>Stany krwi w centrum</Text>
+          <Text style={styles.header}>Stany krwi w centrum </Text>
         </View>
         <View
           style={{

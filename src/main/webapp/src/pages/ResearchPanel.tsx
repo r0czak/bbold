@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Dropdown} from 'react-native-element-dropdown';
 
 const ResearchPanel = () => {
   return (
@@ -10,7 +11,14 @@ const ResearchPanel = () => {
         <Text style={styles.header}>Health check</Text>
       </View>
       <View style={styles.card}>
-        <Text style={styles.inlineText}> wykres here </Text>
+        <Dropdown
+          data={[]}
+          labelField={''}
+          valueField={''}
+          onChange={function (item: any): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
       </View>
       <View style={{alignItems: 'center', marginTop: 15}}>
         <Text style={styles.header}>Karta badań krwi ostatniej donacji</Text>

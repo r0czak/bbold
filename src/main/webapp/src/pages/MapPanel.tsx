@@ -5,15 +5,15 @@ import MapView from 'react-native-maps';
 
 const MapPanel = () => {
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Text>.</Text>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: 51.7822594164352,
+          longitude: 19.461464927407615,
+          latitudeDelta: 0,
+          longitudeDelta: 0,
         }}
       />
     </View>
