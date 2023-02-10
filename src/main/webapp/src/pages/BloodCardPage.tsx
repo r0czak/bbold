@@ -1,5 +1,6 @@
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BloodCard from '../components/BloodCard';
 
@@ -54,9 +55,17 @@ const donationData: LastDonation = {
   donationAmount: '500',
 };
 
-const BloodCardPanel = () => {
+const BloodCardPanel = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
+      <View style={styles.vadenecumButton}>
+        <TouchableOpacity
+          style={styles.vadenecumButton}
+          onPress={() => navigation.navigate('NewsPanel')}>
+          <Text style={{color: '#fff'}}> Karta honorowego dawcy krwi </Text>
+          <Icon name="keyboard-arrow-right" size={28} color="#fff" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.donationCard}>
         <Text style={{fontSize: 17, color: '#000'}}>
           Twoja ostatnia donacja
@@ -97,13 +106,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   donationCard: {
-    marginTop: 20,
     backgroundColor: '#ffffff',
     margin: 10,
     paddingTop: 10,
     paddingHorizontal: 10,
     borderRadius: 15,
-    elevation: 7,
   },
   info: {
     backgroundColor: '#ffffff',
@@ -114,6 +121,15 @@ const styles = StyleSheet.create({
   },
   cards: {
     flex: 1,
+  },
+  vadenecumButton: {
+    backgroundColor: '#fc4a4d',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderRadius: 7,
+    height: 40,
+    margin: 5,
   },
 });
 
