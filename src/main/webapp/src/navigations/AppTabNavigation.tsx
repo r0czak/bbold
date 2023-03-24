@@ -15,7 +15,7 @@ import DiscountPanel from '../pages/DiscountPage';
 import ResearchPanel from '../pages/ResearchPanel';
 import UserProfilePanel from '../pages/UserProfilePanel';
 import NewsViewPanel from '../pages/NewsViewPanel';
-
+import VadenecumPage from '../pages/VadenecumPage';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
@@ -147,7 +147,11 @@ const AppTabNavigation = () => {
 const getTabBarVisibility = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
-  if (routeName == 'NewsPanel' || routeName == 'UserProfilePanel') {
+  if (
+    routeName == 'NewsPanel' ||
+    routeName == 'UserProfilePanel' ||
+    routeName == 'VadenecumPage'
+  ) {
     return 'none';
   }
 
@@ -157,7 +161,11 @@ const getTabBarVisibility = route => {
 const getHeaderBarVisibility = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
-  if (routeName == 'NewsPanel' || routeName == 'UserProfilePanel') {
+  if (
+    routeName == 'NewsPanel' ||
+    routeName == 'UserProfilePanel' ||
+    routeName == 'VadenecumPage'
+  ) {
     return false;
   }
 
@@ -211,6 +219,20 @@ const BloodPanelStack = () => {
         name="BloodCard"
         component={BloodCardPanel}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="VadenecumPage"
+        component={VadenecumPage}
+        options={{
+          title: 'Vadenecum krwiodawcy',
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: '#c43b3d',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+        }}
       />
       <Stack.Screen
         name="UserProfilePanel"

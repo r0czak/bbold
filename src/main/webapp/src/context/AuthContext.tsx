@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect, useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 import {Alert} from 'react-native';
 import axios from 'axios';
 import LoginPanel from '../pages/LoginPanel';
@@ -10,10 +11,10 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [splashLoading, setSplashLoading] = React.useState(false);
-  const [userToken, setUserToken] = React.useState({});
   const [userInfo, setUserInfo] = React.useState({});
+  const [userToken, setUserToken] = React.useState({});
 
-  const {fetchAppData}: any = useContext(FetchContext);
+  //const {fetchAppData}: any = useContext(FetchContext);
 
   const login = (username, password) => {
     setIsLoading(true);
@@ -21,15 +22,13 @@ const AuthProvider = ({children}) => {
     axios
       .post(`http://10.0.2.2:8082/api/auth/signin`, {username, password})
       .then(response => {
-        // console.log(response.data);
-
         let userInfo = response.data;
         setUserInfo(userInfo);
         // setUserToken(userInfo.accessToken);
 
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
         //AsyncStorage.setItem('userToken', userInfo.accessToken);
-        fetchAppData();
+        //fetchAppData();
         setIsLoading(false);
       })
       .catch(e => {
@@ -37,13 +36,13 @@ const AuthProvider = ({children}) => {
         setIsLoading(false);
         Alert.alert(
           'Błąd logowania',
-          'Podałeś błędną nazwę użytkownika bądź hasło. Spróbuj jeszcze raz',
+          'Podałeś błędną nazwę użytkownika lub hasło. Spróbuj jeszcze raz',
           [{text: 'OK'}],
         );
       });
   };
 
-  const register = (
+  const register = async (
     username,
     email,
     password,
@@ -54,46 +53,121 @@ const AuthProvider = ({children}) => {
     pesel,
     bloodType,
   ) => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `http://10.0.2.2:8082/api/auth/signup`,
+        {
+          username,
+          email,
+          password,
+          role: ['user'],
+          firstName,
+          lastName,
+          birthDate,
+          gender,
+          pesel,
+          bloodType,
+        },
+      );
+      Alert.alert(
+        'Udało się pomyślnie zarejestrować',
+        'Możesz teraz przejść do panelu logowania',
+        [
+          {
+            text: 'OK',
+          },
+        ],
+      );
 
-    axios
-      .post(`http://10.0.2.2:8082/api/auth/signup`, {
-        username,
-        email,
-        password,
-        role: ['user'],
-        firstName,
-        lastName,
-        birthDate,
-        gender,
-        pesel,
-        bloodType,
-      })
-      .then(response => {
-        // let userInfo = response.data;
-        // setUserInfo(userInfo);
-        // setUserToken(userInfo.accessToken);
-
-        // AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-        // AsyncStorage.setItem('userToken', userInfo.accessToken);
-
-        Alert.alert(
-          'Zarejestrowano pomyślnie',
-          'Możesz teraz zalogować się do swojego konta w aplikacji',
-          [{text: 'OK'}],
-        );
-        console.log('response data: ' + response);
+      console.log('response data after success: ' + response.data);
+      setIsLoading(false);
+    } catch (error) {
+      if (!error?.response) {
+        console.log('No server response');
         setIsLoading(false);
-      })
-      .catch(e => {
-        Alert.alert('Błąd przy rejestracji', 'Błąd ' + e.response.message, [
-          {text: 'OK'},
+      } else {
+        setIsLoading(false);
+        Alert.alert('Błąd rejestracji', error.response.data.message, [
+          {
+            text: 'OK',
+          },
         ]);
-        console.log('response error: ' + e.response.message);
-        console.log(`Regsiter error ${e}`);
-        setIsLoading(false);
-      });
+      }
+    }
   };
+
+  // const register = (
+  //   username,
+  //   email,
+  //   password,
+  //   firstName,
+  //   lastName,
+  //   birthDate,
+  //   gender,
+  //   pesel,
+  //   bloodType,
+  // ) => {
+  //   setIsLoading(true);
+  //   let isRegisterValid: boolean = false;
+
+  //   axios
+  //     // .post(`http://10.0.2.2:8082/api/auth/signup`, {
+  //     //   username,
+  //     //   email,
+  //     //   password,
+  //     //   role: ['user'],
+  //     //   firstName,
+  //     //   lastName,
+  //     //   birthDate,
+  //     //   gender,
+  //     //   pesel,
+  //     //   bloodType,
+  //     // })
+  //     .post(`http://10.0.2.2:8082/api/auth/signup`, {
+  //       username: 'usernames',
+  //       email: 'email12@gmail.com',
+  //       password: 'password',
+  //       role: ['user'],
+  //       firstName: 'Jan',
+  //       lastName: 'Kowalski',
+  //       birthDate: '13/02/2021',
+  //       gender: 'MALE',
+  //       pesel: '99021103421',
+  //       bloodType: 'A_POSITIVE',
+  //     })
+  //     .then(response => {
+  //       // let userInfo = response.data;
+  //       // setUserInfo(userInfo);
+  //       // setUserToken(userInfo.accessToken);
+
+  //       // AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+  //       // AsyncStorage.setItem('userToken', userInfo.accessToken);
+  //       // Alert.alert('Udało się pomyślnie zarejestrować użytkownika', '', [
+  //       //   {
+  //       //     text: 'OK',
+  //       //   },
+  //       // ]);
+  //       console.log('response data: ' + response);
+  //       setIsLoading(false);
+  //     })
+  //     .catch(error => {
+  //       // Alert.alert('Błąd przy rejestracji', '', [{text: 'OK'}]);
+  //       console.log(
+  //         'error: ' + error.message + ', -> ' + error.response.data.message,
+  //       );
+  //       // console.log(`Regsiter error ${e}`);
+  //       setIsLoading(false);
+  //       if (error.response) {
+  //         console.log('response : ' + error.response);
+  //       } else if (error.request) {
+  //         console.log('request : ' + error.request);
+  //       } else if (error.message) {
+  //         console.log('message : ' + error.message);
+  //       }
+  //       //isRegisterValid = false;
+  //     });
+  // };
 
   const logout = () => {
     setIsLoading(true);
@@ -129,7 +203,7 @@ const AuthProvider = ({children}) => {
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
-      fetchAppData();
+      //fetchAppData();
 
       let userInfo = await AsyncStorage.getItem('userInfo');
       //let userToken = await AsyncStorage.getItem('userToken');

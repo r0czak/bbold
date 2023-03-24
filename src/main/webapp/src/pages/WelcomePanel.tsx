@@ -21,17 +21,17 @@ const WelcomePanel = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headline}> Welcome in BBold App </Text>
+      <Text style={styles.headline}> Witamy w aplikacji 'BBold' </Text>
       <Image
         source={require('../../assets/images/welcomeWidget.png')}
         style={styles.banner}
         resizeMode="contain"
       />
       <Text style={styles.descriptionText}>
-        Aplikacja dla krwiodwaców dzięki której będziesz mieć wszystkie
+        Aplikacja dla krwiodwaców dzięki której będziesz miał/a wszystkie
         potrzebne aktualności, informacje i powiadomienia w jednym miejscu!
         Zaloguj się na swoje indywidualne konto, bądź zarejestruj się jeśli
-        jeszcze nie jesteś czynnym dawcą krwi i zacznij pomagać!
+        jeszcze nie jesteś czynnym dawcą krwi i zacznij pomagać innym!
       </Text>
 
       <TouchableOpacity
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 15,
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
   },
   button: {
     marginVertical: 15,

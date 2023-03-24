@@ -14,14 +14,14 @@ const App = () => {
   // const [userToken, setUserToken] = React.useState<any>(null);
 
   return (
-    <FetchProvider>
-      <AuthProvider>
-        <AppNavigation />
-        {/* <NavigationContainer>
-        <AppTabNavigation />
-      </NavigationContainer> */}
-      </AuthProvider>
-    </FetchProvider>
+    //<FetchProvider>
+    <AuthProvider>
+      <AppNavigation />
+      {/* <NavigationContainer>
+          <AppTabNavigation />
+        </NavigationContainer> */}
+    </AuthProvider>
+    //</FetchProvider>
   );
 };
 

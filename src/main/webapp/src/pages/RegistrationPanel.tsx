@@ -15,6 +15,7 @@ import CustomButton from '../components/CustomButton';
 import CustomDatePicker from '../components/CustomDatePicker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {validatePolish} from 'validate-polish';
 import {AuthContext} from '../context/AuthContext';
 
 const genderOption = [
@@ -58,95 +59,109 @@ const RegistrationPanel = ({navigation}) => {
     bloodTypeError: '',
   });
 
-  const {isLoading, register}: any = useContext(AuthContext);
+  const {register, isLoading}: any = useContext(AuthContext);
 
-  const RegisterValidation = () => {
+  const registerValidation = () => {
     Keyboard.dismiss();
+    let isValid: boolean = true;
+
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    let isValid: boolean = true;
 
     if (!data.username || data.username.length < 3) {
       handleError('Wprowadź poprawną nazwę użytkownika', 'usernameError');
       isValid = false;
-    } else {
-      handleError('', 'usernameError');
-      isValid = true;
     }
 
     if (
       // !data.password ||
-      data.password.length < 6
-      // !passwordRegex.test(data.password)
+      data.password.length < 6 ||
+      !passwordRegex.test(data.password)
     ) {
       handleError('Wprowadź poprawne hasło', 'passwordError');
       isValid = false;
-    } else {
-      handleError('', 'passwordError');
-      isValid = true;
     }
 
     if (!data.email || !emailRegex.test(data.email)) {
-      handleError('Wprowadź email', 'emailError');
+      handleError('Wprowadź poprawny email', 'emailError');
       isValid = false;
-    } else {
-      handleError('', 'emailError');
-      isValid = true;
     }
 
     if (!data.firstname) {
       handleError('Wprowadź swoje imie', 'firstnameError');
       isValid = false;
-    } else {
-      handleError('', 'firstnameError');
-      isValid = true;
     }
 
     if (!data.lastname) {
       handleError('Wprowadź swoje nazwisko', 'lastnameError');
       isValid = false;
-    } else {
-      handleError('', 'lastnameError');
-      isValid = true;
     }
 
     if (!data.peselNumber || data.peselNumber.length != 11) {
       handleError('Wprowadź poprawny numer pesel', 'peselNumberError');
       isValid = false;
-    } else {
-      handleError('', 'peselNumberError');
-      isValid = true;
     }
 
-    if (!data.birthdate) {
-      handleError('Wprowadź swoją datę urodzenia', 'birthdateError');
+    if (!data.birthdate || !validateBirthdate(data.birthdate)) {
+      handleError('Wprowadź poprawną datę urodzenia', 'birthdateError');
       isValid = false;
-    } else {
-      handleError('', 'birthdateError');
-      isValid = true;
     }
 
     if (!data.gender) {
       handleError('Wybierz swoją płeć', 'genderError');
       isValid = false;
-    } else {
-      handleError('', 'genderError');
-      isValid = true;
     }
 
     if (!data.bloodType) {
       handleError('Wybierz swoją grupę krwi', 'bloodTypeError');
       isValid = false;
-    } else {
-      handleError('', 'bloodTypeError');
-      isValid = true;
     }
 
     return isValid;
   };
 
+  const validateBirthdate = birthdate => {
+    let isValid: boolean = true;
+
+    var bday = birthdate;
+    bday = bday.split('-');
+    var birthdateMiliseconds = new Date(
+      parseInt(bday[0], 10),
+      parseInt(bday[1], 10) - 1,
+      parseInt(bday[2]),
+      10,
+    ).getTime();
+
+    var nowDate = new Date().getTime();
+
+    if (nowDate - birthdateMiliseconds > 567648000000) {
+      isValid = true;
+    } else {
+      Alert.alert(
+        'Pamiętaj',
+        'Nie możesz zostać dawcą krwi poniżej 18 roku życia',
+        [
+          {
+            text: 'OK',
+          },
+        ],
+      );
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const handleOnChange = (value, input) => {
+    setData(prevState => ({...prevState, [input]: value}));
+  };
+
+  const handleError = (error, input) => {
+    setErrors(prevState => ({...prevState, [input]: error}));
+  };
+
   const handleRegister = () => {
-    if (RegisterValidation() == true) {
+    if (registerValidation() == true) {
       register(
         data.username,
         data.email,
@@ -158,18 +173,9 @@ const RegistrationPanel = ({navigation}) => {
         data.peselNumber,
         data.bloodType,
       );
-      // navigation.navigate('LoginPage');
     } else {
       console.log('register validation error');
     }
-  };
-
-  const handleOnChange = (value, input) => {
-    setData(prevState => ({...prevState, [input]: value}));
-  };
-
-  const handleError = (error, input) => {
-    setErrors(prevState => ({...prevState, [input]: error}));
   };
 
   return (
@@ -185,10 +191,6 @@ const RegistrationPanel = ({navigation}) => {
           </TouchableOpacity>
           <Text style={styles.pageTitle}> Rejestracja konta dawcy </Text>
         </View>
-        {/* <ImageBackground
-        source={require('../../assets/images/appLogo.png')}
-        resizeMode="contain"
-        style={styles.backgroundImage}> */}
         <View>
           <Text style={{color: '#fff', fontSize: 16}}>
             Dane szczegółowe dawcy

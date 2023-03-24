@@ -41,9 +41,6 @@ const LoginPanel = ({navigation}) => {
     } else if (data.username.length < 3) {
       handleError('Wprowadź poprawną nazwę użytkownika', 'usernameError');
       isValid = false;
-    } else {
-      handleError('', 'usernameError');
-      isValid = true;
     }
 
     if (!data.password) {
@@ -52,9 +49,6 @@ const LoginPanel = ({navigation}) => {
     } else if (data.password.length < 6) {
       handleError('Wprowadź poprawne hasło', 'passwordError');
       isValid = false;
-    } else {
-      handleError('', 'passwordError');
-      isValid = true;
     }
 
     return isValid;
