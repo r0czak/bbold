@@ -28,7 +28,8 @@ const NewsCard = ({item, onPressFunctionality}) => {
       <View style={styles.cardContainer}>
         <Image
           style={styles.imageContainer}
-          source={require('../../assets/images/2.png')}
+          //source={require('../../assets/images/2.png')}
+          source={item.imageURL}
         />
         <View style={styles.cardText}>
           <Text style={styles.cardTitle}>{item.title}</Text>

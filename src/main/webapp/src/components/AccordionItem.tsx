@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     fontSize: 14,
+    color: '#4d4d4d',
   },
 });
 

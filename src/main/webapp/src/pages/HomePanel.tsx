@@ -14,10 +14,6 @@ import {
 import axios from 'axios';
 import BloodLevelItem from '../components/BloodLevelItem';
 import NewsCard from '../components/NewsCard';
-import AccordionItem from '../components/AccordionItem';
-import {AccordionList} from 'react-native-accordion-list-view';
-import Spinner from 'react-native-loading-spinner-overlay';
-import SplashScreen from '../components/SplashScreen';
 
 const data = [
   {title: 'A Rh+', bloodLevel: 15},

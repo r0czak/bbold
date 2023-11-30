@@ -17,6 +17,45 @@ import DiscountModalItem from './DiscountModalItem';
 const DiscountCard = ({item}) => {
   const [visible, setVisible] = React.useState(false);
 
+  const checkIsActive = (date: Date) => {
+    var tempdate = new Date(date).getTime();
+
+    if (tempdate > Date.now()) {
+      return false;
+    } else {
+      return true;
+    }
+    //return date.getTime() > Date.now() + 0;
+    return true;
+  };
+  /*     let isValid: boolean = true;
+
+    var bday = birthdate;
+    bday = bday.split('-');
+    var birthdateMiliseconds = new Date(
+      parseInt(bday[0], 10),
+      parseInt(bday[1], 10) - 1,
+      parseInt(bday[2]),
+      10,
+    ).getTime();
+
+    var nowDate = new Date().getTime();
+
+    if (nowDate - birthdateMiliseconds > 567648000000) {
+      isValid = true;
+    } else {
+      Alert.alert(
+        'Pamiętaj',
+        'Nie możesz zostać dawcą krwi poniżej 18 roku życia',
+        [
+          {
+            text: 'OK',
+          },
+        ],
+      );
+      isValid = false;
+    }*/
+
   return (
     <View>
       <DiscountModalItem visible={visible}>
@@ -31,7 +70,7 @@ const DiscountCard = ({item}) => {
             <Text style={styles.modalText}> {item.description} </Text>
             <View style={styles.qrContainer}>
               <QRCode
-                value="Just some string value"
+                value="http://google.com"
                 size={180}
                 // logo={{uri: base64Logo}}
                 // logoSize={30}
@@ -40,8 +79,8 @@ const DiscountCard = ({item}) => {
             </View>
             <Text style={styles.modalText}>
               {' '}
-              Aktywuj swoją zniżkę poprzez zeskanowanie kodu QR w punkcie -...
-              szczegóły{' '}
+              Aktywuj swoją zniżkę poprzez zeskanowanie kodu QR w punkcie po
+              dokonanej donacji krwi.{' '}
             </Text>
           </View>
         </View>
@@ -55,7 +94,8 @@ const DiscountCard = ({item}) => {
         <View style={{flexDirection: 'column', flex: 2, margin: 5}}>
           <View style={styles.rowContainer}>
             <View style={{flex: 1, paddingTop: 5}}>
-              {item.status ? (
+              {/* {item.status ? ( */}
+              {checkIsActive(item.date) ? (
                 <Text style={{color: '#3cbd00', fontSize: 15}}> Aktywne </Text>
               ) : (
                 <Text style={{color: '#ff0202', fontSize: 15}}>
@@ -66,12 +106,18 @@ const DiscountCard = ({item}) => {
             </View>
             <View style={{flex: 1}}>
               <TouchableOpacity
+                // style={
+                //   item.status ? styles.buttonActive : styles.buttonDisactive
+                // }
                 style={
-                  item.status ? styles.buttonActive : styles.buttonDisactive
+                  checkIsActive(item.date)
+                    ? styles.buttonActive
+                    : styles.buttonDisactive
                 }
                 onPress={() => setVisible(!visible)}
                 activeOpacity={0.5}
-                disabled={!item.status}>
+                //disabled={!item.status}
+                disabled={!checkIsActive(item.date)}>
                 <Text style={{color: '#fff', fontSize: 16}}> Wykorzystaj </Text>
               </TouchableOpacity>
             </View>
@@ -100,7 +146,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 18,
-    color: '#00000',
+    color: '#313131',
     fontWeight: 'bold',
     margin: 5,
     paddingTop: 5,

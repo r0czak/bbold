@@ -4,10 +4,7 @@ import {StyleSheet, Text, View, Image, ScrollView, Button} from 'react-native';
 const NewsViewPanel = ({route}) => {
   return (
     <ScrollView>
-      <Image
-        style={styles.image}
-        source={require('../../assets/images/2.png')}
-      />
+      <Image style={styles.image} source={route.params?.item.imageURL} />
       <View style={styles.container}>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.header}>{route.params?.item.title}</Text>
@@ -23,7 +20,10 @@ const NewsViewPanel = ({route}) => {
           <Text style={styles.dateText}> Data: {route.params?.item.date} </Text>
         </View>
         <View style={{paddingBottom: 10}}>
-          <Text style={styles.description}> {route.params?.item.content} </Text>
+          <Text style={styles.description}>
+            {' '}
+            {route.params?.item.bodyText}{' '}
+          </Text>
         </View>
       </View>
     </ScrollView>

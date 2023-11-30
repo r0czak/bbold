@@ -7,32 +7,32 @@ import BloodCard from '../components/BloodCard';
 const data = [
   {
     donationType: 'Krew pełna',
-    donationAmount: '1000 ml',
-    donationDate: '05.12.22',
+    donationAmount: '- ml',
+    donationDate: '28.01.23',
     cardColor: '#c43b3d',
   },
   {
     donationType: 'Osocze',
-    donationAmount: '550 ml',
-    donationDate: '05.12.22',
+    donationAmount: '- ml',
+    donationDate: '14.01.23',
     cardColor: '#ff9100',
   },
   {
     donationType: 'Płytki krwi',
-    donationAmount: '200 ml',
-    donationDate: '05.12.22',
+    donationAmount: '- ml',
+    donationDate: '28.01.23',
     cardColor: '#2fa524',
   },
   {
     donationType: 'Krwinki czerwone',
-    donationAmount: '500 ml',
-    donationDate: '05.12.22',
+    donationAmount: '- ml',
+    donationDate: '28.01.23',
     cardColor: '#3791da',
   },
   {
     donationType: 'Krwinki białe',
-    donationAmount: '100 ml',
-    donationDate: '05.12.22',
+    donationAmount: '- ml',
+    donationDate: '28.01.23',
     cardColor: '#dbdd4b',
   },
   {
@@ -50,19 +50,51 @@ interface LastDonation {
 }
 
 const donationData: LastDonation = {
-  date: '04.11.2022',
+  date: '02.12.2022',
   donationType: 'Krew pełna',
-  donationAmount: '500',
+  donationAmount: '450',
 };
 
 const BloodCardPanel = ({navigation}: {navigation: any}) => {
+  const [lastDonation, setLastDonation] = React.useState([]);
+  const [bloodData, setBloodData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [responseError, setResponseError] = React.useState(false);
+
+  React.useEffect(() => {
+    getUserDonations();
+  }, []);
+
+  const getUserDonations = async () => {
+    setIsLoading(true);
+
+    try {
+      // const response = await axios(`http://10.0.2.2:8082/api/news/all`, {
+      //   timeout: 5000,
+      //   method: 'GET',
+      // });
+
+      //setNews(response.data);
+      //console.log('response: ' + response);
+      setIsLoading(false);
+      setResponseError(false);
+    } catch (error) {
+      console.log('fetch error - ' + error);
+      setIsLoading(false);
+      setResponseError(true);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.vadenecumButton}>
         <TouchableOpacity
           style={styles.vadenecumButton}
-          onPress={() => navigation.navigate('NewsPanel')}>
-          <Text style={{color: '#fff'}}> Karta honorowego dawcy krwi </Text>
+          onPress={() => navigation.navigate('VadenecumPage')}>
+          <Text style={{color: '#fff', fontSize: 14}}>
+            {' '}
+            Kompendium wiedzy dawcy krwi{' '}
+          </Text>
           <Icon name="keyboard-arrow-right" size={28} color="#fff" />
         </TouchableOpacity>
       </View>
